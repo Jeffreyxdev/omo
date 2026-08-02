@@ -156,3 +156,4 @@ no separate backend server to host.
    closing level. The system compares physical depletion against recorded pump sales.
    A closing level below the expected value signals shrinkage (leak, theft, evaporation).
 # omo
+# omo
