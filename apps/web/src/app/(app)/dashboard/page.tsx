@@ -109,11 +109,11 @@ export default async function DashboardPage() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-px bg-neutral-200 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="bg-white p-5">
+          <div key={s.label} className="min-w-0 bg-white p-5">
             <div className="section-title">{s.label}</div>
-            <div className={`mt-2 text-2xl font-semibold tracking-tight tabular-nums ${s.tone}`}>
+            <div className={`mt-2 text-2xl font-semibold tracking-tight tabular-nums break-words ${s.tone}`}>
               {s.value}
             </div>
           </div>

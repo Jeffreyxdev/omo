@@ -62,10 +62,10 @@ export default function BarChart({
   });
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full">
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full min-w-[520px]"
+        className="h-auto w-full"
         role="img"
       >
         {grid.map((g, i) => (
