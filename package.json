@@ -1,0 +1,31 @@
+{
+  "name": "udyking-fis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Udyking Filling Station - Financial Information System (monorepo)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @udyking/web",
+    "build": "npm run build -w @udyking/web",
+    "start": "npm run start -w @udyking/web",
+    "setup": "node scripts/setup-env.mjs",
+    "db:generate": "prisma generate --schema packages/db/prisma/schema.prisma",
+    "db:migrate": "prisma migrate dev --schema packages/db/prisma/schema.prisma",
+    "db:deploy": "prisma migrate deploy --schema packages/db/prisma/schema.prisma",
+    "db:seed": "prisma db seed --schema packages/db/prisma/schema.prisma",
+    "db:studio": "prisma studio --schema packages/db/prisma/schema.prisma",
+    "db:reset": "prisma migrate reset --schema packages/db/prisma/schema.prisma",
+    "typecheck": "npm run typecheck -w @udyking/web"
+  },
+  "prisma": {
+    "seed": "tsx packages/db/prisma/seed.ts"
+  },
+  "devDependencies": {
+    "prisma": "^6.6.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  }
+}

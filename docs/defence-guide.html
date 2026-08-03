@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Udyking FIS - Project Defence Guide</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: #1e293b;
+    margin: 0;
+  }
+  h1, h2, h3, h4 { color: #0f3d3e; }
+  h1 {
+    font-size: 17pt;
+    border-bottom: 3px solid #059669;
+    padding-bottom: 6px;
+    margin: 26px 0 12px 0;
+    page-break-after: avoid;
+  }
+  h2 {
+    font-size: 13.5pt;
+    margin: 20px 0 8px 0;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin: 14px 0 6px 0;
+    page-break-after: avoid;
+  }
+  h4 { font-size: 10.5pt; margin: 10px 0 4px 0; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-left: 22px; }
+  li { margin: 3px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 9.5pt;
+  }
+  th {
+    background: #0f766e;
+    color: #fff;
+    text-align: left;
+    padding: 6px 8px;
+    font-weight: 600;
+  }
+  td {
+    border: 1px solid #d7dfe3;
+    padding: 5px 8px;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f6faf9; }
+  .page-break { page-break-before: always; }
+  .no-break { page-break-inside: avoid; }
+
+  /* Title page */
+  .title-page { text-align: center; padding-top: 130px; }
+  .title-page .project-name {
+    font-size: 30pt;
+    font-weight: 800;
+    color: #0f3d3e;
+    letter-spacing: 1px;
+  }
+  .title-page .subtitle {
+    font-size: 15pt;
+    color: #047857;
+    margin: 12px 0;
+  }
+  .title-page .full-title {
+    font-size: 12pt;
+    color: #475569;
+    margin: 8px auto;
+    max-width: 480px;
+  }
+  .title-page .meta {
+    margin-top: 60px;
+    font-size: 11pt;
+    color: #334155;
+    line-height: 2;
+  }
+  .title-page .badge {
+    display: inline-block;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+    border-radius: 999px;
+    padding: 4px 16px;
+    font-size: 10pt;
+    margin-top: 20px;
+  }
+
+  /* Callouts */
+  .tip {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .warn {
+    background: #fff7ed;
+    border-left: 4px solid #f97316;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .key {
+    background: #ecfdf5;
+    border-left: 4px solid #059669;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .formula {
+    background: #f8fafc;
+    border: 1px solid #d7dfe3;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-family: "Courier New", monospace;
+    font-size: 10pt;
+    margin: 8px 0;
+  }
+
+  /* Q&A blocks */
+  .qa { margin: 10px 0 16px 0; page-break-inside: avoid; }
+  .qa .question {
+    font-weight: 700;
+    color: #0f3d3e;
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    border-left: 5px solid #059669;
+    padding: 7px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+  }
+  .qa .answer { padding: 0 4px; }
+  .qa .answer p { margin: 5px 0; }
+  .qtag {
+    display: inline-block;
+    font-size: 8pt;
+    font-weight: 600;
+    color: #0f766e;
+    background: #ccfbf1;
+    border-radius: 999px;
+    padding: 1px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* Page/feature boxes */
+  .feature {
+    border: 1px solid #d7dfe3;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .feature h3 { margin-top: 2px; }
+  .feature .facts { font-size: 9pt; color: #475569; }
+  code {
+    background: #f1f5f9;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: "Courier New", monospace;
+    font-size: 9pt;
+  }
+  .small { font-size: 9pt; color: #64748b; }
+  .center { text-align: center; }
+  .toc { font-size: 10pt; }
+  .toc li { margin: 4px 0; }
+  a { color: #047857; text-decoration: none; }
+  .footer-note {
+    margin-top: 30px;
+    border-top: 1px solid #d7dfe3;
+    padding-top: 8px;
+    font-size: 8.5pt;
+    color: #94a3b8;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== TITLE PAGE ==================== -->
+<div class="title-page">
+  <div class="project-name">UDYKING FIS</div>
+  <div class="subtitle">Financial Information System for Small and Medium Enterprises</div>
+  <div class="full-title">
+    An Automated, Direct-Access (Random Indexing) Financial Information System for
+    Independent Retail Fuel Stations &mdash; A Case Study of Udyking Filling Station
+  </div>
+  <div class="badge">Final Year Project &mdash; Defence Preparation Guide</div>
+  <div class="meta">
+    <strong>Project Title:</strong> Design and Implementation of a Direct-Access
+    Financial Information System for SMEs (Udyking Filling Station)<br>
+    <strong>Author:</strong> [Your Full Name]<br>
+    <strong>Department:</strong> Computer Science<br>
+    <strong>Supervisor:</strong> [Supervisor&rsquo;s Name]<br>
+    <strong>Date:</strong> [Defence Date]
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== CONTENTS ==================== -->
+<h1>Contents of This Guide</h1>
+<ol class="toc">
+  <li>How to Defend the Project &mdash; Strategy &amp; Structure</li>
+  <li>The 30-Second Elevator Pitch</li>
+  <li>Suggested Presentation Flow (with timing)</li>
+  <li>Live Demo Script &mdash; Page by Page</li>
+  <li>System Architecture &amp; Technology Choices</li>
+  <li>The Direct-Access (Random Indexing) Argument &mdash; your core concept</li>
+  <li>Page-by-Page Guide: What Each Page Does &amp; How to Use It</li>
+  <li>Roles &amp; Permission Matrix</li>
+  <li>Key Formulas &amp; Calculations</li>
+  <li>Security Measures (be ready to explain)</li>
+  <li>Defence Question Bank &mdash; 40 likely questions with model answers</li>
+  <li>Evaluation Against Project Objectives</li>
+  <li>Limitations &amp; Future Work</li>
+  <li>Presentation Tips &amp; Common Pitfalls</li>
+  <li>Glossary of Key Terms</li>
+</ol>
+
+<div class="tip">
+  <strong>How to use this guide:</strong> Sections 1&ndash;4 prepare your delivery and
+  demo. Sections 5&ndash;6 give you deep technical understanding. Sections 7&ndash;10 are
+  reference material. Section 11 is the most important part to rehearse &mdash; read each
+  question, close the guide, and answer out loud until it sounds natural.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 1 ==================== -->
+<h1>1. How to Defend the Project &mdash; Strategy &amp; Structure</h1>
+
+<h2>1.1 The examiner&rsquo;s mindset</h2>
+<p>
+The panel is not trying to fail you. They want to confirm three things:
+</p>
+<ul>
+  <li><strong>You understand the problem</strong> you set out to solve and why it matters.</li>
+  <li><strong>You actually built it</strong> &mdash; it works, and you can show it working.</li>
+  <li><strong>You understand your own code and decisions</strong> &mdash; why you chose each technology, how the data flows, and what its limits are.</li>
+</ul>
+<p>
+Every question they ask maps to one of those three. Answer accordingly: state the fact,
+then connect it back to the project&rsquo;s goal.
+</p>
+
+<h2>1.2 The formula for a great answer</h2>
+<div class="formula">POINT (answer directly) &rarr; PROOF (show/quote the system) &rarr; WHY (reasoning / trade-off)</div>
+<p>Example: <em>&ldquo;Why did you use PostgreSQL?&rdquo;</em> &rarr; <em>&ldquo;A relational database gives me structured financial records with integrity (POINT). The schema stores users, pumps, shifts and readings with foreign keys and unique constraints (PROOF). I chose Postgres specifically because the system deploys on Vercel&rsquo;s serverless platform, where a hosted Postgres keeps data persistent, and it supports the B-tree indexes that give my direct-access queries O(log n) speed (WHY).&rdquo;</em></p>
+
+<h2>1.3 Structure of a typical defence (10&ndash;15 minutes + questions)</h2>
+<table>
+  <tr><th style="width:20%">Time</th><th style="width:30%">Segment</th><th>What you do</th></tr>
+  <tr><td>0&ndash;2 min</td><td>Introduction</td><td>Title, your name, supervisor, and a one-sentence summary of the project.</td></tr>
+  <tr><td>2&ndash;4 min</td><td>Problem &amp; Motivation</td><td>Manual bookkeeping failures; slow sequential systems; why SMEs and filling stations specifically.</td></tr>
+  <tr><td>4&ndash;6 min</td><td>Proposed Solution &amp; Architecture</td><td>Direct-access database, web application, three-tier flow: browser &rarr; API &rarr; database.</td></tr>
+  <tr><td>6&ndash;10 min</td><td>Live Demonstration</td><td>Walk through the pages (Section 4 script). Let the system do the talking.</td></tr>
+  <tr><td>10&ndash;12 min</td><td>Results / Evaluation</td><td>Show reconciliation accuracy, variance detection, report outputs.</td></tr>
+  <tr><td>12&ndash;15 min</td><td>Conclusion &amp; Future Work</td><td>Restate the contribution; list 2&ndash;3 realistic extensions.</td></tr>
+  <tr><td>remaining</td><td>Questions</td><td>Answer confidently using the question bank (Section 11).</td></tr>
+</table>
+
+<h2>1.4 Golden rules during the defence</h2>
+<ul>
+  <li><strong>Demo first, talk second.</strong> Examiners love seeing it work. Keep narrative short during the demo.</li>
+  <li><strong>Know the numbers.</strong> Remember key facts: 4 pumps, 3 tanks, 3 fuel types, 3 roles, ~15 API endpoints, 6 database tables.</li>
+  <li><strong>If you don&rsquo;t know, be honest.</strong> Say <em>&ldquo;I haven&rsquo;t tested that specifically, but based on how X is implemented, I would approach it by&hellip;&rdquo;</em> Honesty plus reasoning scores better than bluffing.</li>
+  <li><strong>Never overclaim.</strong> The project does not do payroll, does not read pump telemetry, and is designed for a single station. Saying otherwise invites follow-up questions that fail you.</li>
+  <li><strong>Have a backup plan</strong> for the demo: production build running locally, screenshots saved, and the data re-seeded (one command: <code>npm run db:reset</code>).</li>
+  <li><strong>Dress and speak like a professional.</strong> Slow down, look at the panel, and pause after each point.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 2 ==================== -->
+<h1>2. The 30-Second Elevator Pitch</h1>
+<div class="key">
+Memorise this. It is the answer to the very first question in almost every defence:
+<em>&ldquo;Summarise your project.&rdquo;</em>
+</div>
+<blockquote>
+&ldquo;My project is a web-based Financial Information System for small and medium
+enterprises, built for a retail filling station as a case study. Independent stations
+still manage daily fuel sales and cash using manual ledgers, which are slow, error-prone,
+and vulnerable to loss &mdash; and early computerised systems were limited by sequential
+storage, so retrieving any historical record took longer as data grew. I designed and
+implemented a system on a direct-access database architecture: every record is located by
+its hash-indexed key in constant time, and date-range queries use B-tree indexes. The
+system lets pump attendants record meter readings, lets supervisors reconcile expected
+pump revenue against cash and POS collections instantly, and lets managers monitor
+underground tank inventory to detect shrinkage. It runs as a Next.js application with a
+REST API and a PostgreSQL database, organised in a monorepo so the whole system deploys
+to Vercel as one project.&rdquo;
+</blockquote>
+<p class="small">(~35 seconds at a normal speaking pace &mdash; trim the last sentence if needed.)</p>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 3 ==================== -->
+<h1>3. Suggested Presentation Flow</h1>
+<p>Use this slide/page order. Each slide has one main idea and one visual.</p>
+
+<table>
+  <tr><th style="width:8%">Slide</th><th style="width:28%">Title</th><th>Content / Visual</th></tr>
+  <tr><td>1</td><td>Title slide</td><td>Project name, student, supervisor, date.</td></tr>
+  <tr><td>2</td><td>The Problem</td><td>Manual ledger weaknesses (human error, physical loss); sequential processing latency (reading 299 days to reach day 300).</td></tr>
+  <tr><td>3</td><td>Why SMEs / Why a filling station</td><td>High-volume, low-margin, cash-intensive; high risk of revenue leakage and tank shrinkage.</td></tr>
+  <tr><td>4</td><td>The Solution</td><td>Direct-access architecture + web application; diagram: Attendant &rarr; Browser &rarr; API &rarr; Database.</td></tr>
+  <tr><td>5</td><td>Objectives &rarr; Features map</td><td>Table: each objective from the proposal and the module that fulfils it (Section 12).</td></tr>
+  <tr><td>6&ndash;9</td><td>Demo</td><td>Login &rarr; Dashboard &rarr; Shift Sales &rarr; Inventory &rarr; Reports (use the script in Section 4).</td></tr>
+  <tr><td>10</td><td>Evaluation</td><td>Reconciliation accuracy; variance detection; reports for audit.</td></tr>
+  <tr><td>11</td><td>Architecture &amp; Security</td><td>Monorepo layout, tech stack table, auth/security bullet points.</td></tr>
+  <tr><td>12</td><td>Conclusion &amp; Future Work</td><td>Contribution + extensions (telemetry, multi-station, payroll).</td></tr>
+  <tr><td>13</td><td>Thank you / Questions</td><td>One line: &ldquo;Thank you &mdash; I welcome your questions.&rdquo;</td></tr>
+</table>
+
+<div class="warn">
+<strong>Do not</strong> read the slides. Slides hold keywords; you speak the explanation.
+<strong>Do not</strong> rush the demo &mdash; the demo is your strongest evidence.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 4 ==================== -->
+<h1>4. Live Demo Script &mdash; Page by Page</h1>
+<p>
+Practice this until it takes you 4&ndash;5 minutes. The seeded database contains 7 days of
+closed shifts and one open shift for today, so every screen has realistic data on first load.
+</p>
+
+<h2>Step 0 &mdash; Preparation (before the panel arrives)</h2>
+<ul>
+  <li>Start the app: <code>npm run dev</code> (or <code>npm run build &amp;&amp; npm run start</code>).</li>
+  <li>If the data was modified during rehearsal, reset it: <code>npm run db:reset</code> (this re-seeds automatically).</li>
+  <li>Keep a terminal window visible so you can show the server logs running.</li>
+</ul>
+
+<h2>Step 1 &mdash; Login (20 seconds)</h2>
+<p><strong>Say:</strong> <em>&ldquo;The system uses role-based accounts. I&rsquo;ll sign in as the manager.&rdquo;</em></p>
+<ul>
+  <li>Open <code>/login</code>, enter <code>admin@udyking.com</code> / <code>admin123</code>.</li>
+  <li>Point out: password is hashed in the database; the session is an httpOnly cookie, so it cannot be read by browser scripts.</li>
+</ul>
+
+<h2>Step 2 &mdash; Dashboard (45 seconds)</h2>
+<p><strong>Say:</strong> <em>&ldquo;The dashboard gives management an at-a-glance operational view.&rdquo;</em></p>
+<ul>
+  <li>Stat cards: <em>&ldquo;Today&rsquo;s fuel sold in litres, today&rsquo;s expected revenue, open-shift status, active pumps.&rdquo;</em></li>
+  <li>7-day revenue chart: <em>&ldquo;This is generated from the database&rsquo;s indexed records &mdash; no manual totalling.&rdquo;</em></li>
+  <li>Open-shift card and Product-Loss Alerts: <em>&ldquo;If any tank shows physical depletion above recorded sales, an alert appears here immediately.&rdquo;</em></li>
+  <li>Recent shifts table with variances highlighted in red where cash did not match pump revenue.</li>
+</ul>
+
+<h2>Step 3 &mdash; Shift Sales (2 minutes &mdash; the heart of the project)</h2>
+<p><strong>Say:</strong> <em>&ldquo;This is the daily operational workflow. An attendant opens a shift and records pump meter readings; a supervisor later reconciles the cash.&rdquo;</em></p>
+<ul>
+  <li>Because a shift is already open (seeded for today), the board shows one row per pump: Pump 1 and 2 (PMS at &sup1;1,150/L), Pump 3 (AGO at &sup1;1,300/L), Pump 4 (DPK at &sup1;1,250/L).</li>
+  <li>Point at the live computation: change the closing reading on one pump and show litres-sold and expected revenue recomputing instantly (no manual multiplication).</li>
+  <li>Press <strong>Save Pump Readings</strong>; show the confirmation message.</li>
+  <li>Enter a cash and POS amount for one pump: show the variance column turning red when cash &plus; POS is below expected revenue. <em>&ldquo;The system does not accuse anyone &mdash; it flags the gap so the supervisor investigates before closing.&rdquo;</em></li>
+  <li>Click <strong>Close Shift &amp; Reconcile</strong>; the totals row shows expected, actual and variance, and the shift moves into history.</li>
+  <li>Optionally open a new shift with the <strong>Open Today&rsquo;s Shift</strong> button so the panel sees that flow too.</li>
+</ul>
+
+<h2>Step 4 &mdash; Shift History / Shift Detail (30 seconds)</h2>
+<ul>
+  <li>Click <strong>View</strong> on a closed shift: show the full breakdown per pump &mdash; opening/closing readings, litres, expected, cash, POS, variance, and who opened and closed it. <em>&ldquo;Every figure is traceable to a person and a time &mdash; that is the audit trail.&rdquo;</em></li>
+</ul>
+
+<h2>Step 5 &mdash; Inventory (45 seconds)</h2>
+<p><strong>Say:</strong> <em>&ldquo;Inventory control is what protects the station from shrinkage &mdash; leaks, evaporation, or unrecorded discharge.&rdquo;</em></p>
+<ul>
+  <li>Show the history table: opening level, litres received, pump sales, expected closing, actual closing, and the variance column (losses in red).</li>
+  <li>Record a new check: pick the PMS tank, enter opening level, received litres and dip closing level. <em>&ldquo;The system calculates expected closing as opening plus receipts minus what the pumps recorded, and compares it with the physical dip reading. A closing level below expected means product is missing.&rdquo;</em></li>
+</ul>
+
+<h2>Step 6 &mdash; Reports (45 seconds)</h2>
+<p><strong>Say:</strong> <em>&ldquo;Reports turn the raw records into management information for daily, weekly and monthly audits.&rdquo;</em></p>
+<ul>
+  <li>Daily Sales tab: totals (litres, expected revenue, cash, POS, net variance) plus a per-day chart and table.</li>
+  <li>Monthly Summary tab: revenue by month across the selected range.</li>
+  <li>Inventory tab: volumetric report with net loss/surplus.</li>
+  <li>Show the date-range picker: <em>&ldquo;Any range queries against the database run on B-tree indexes &mdash; this is where the direct-access architecture removes the sequential bottleneck described in the problem statement.&rdquo;</em></li>
+</ul>
+
+<h2>Step 7 &mdash; Pumps &amp; Tanks, Staff (30 seconds)</h2>
+<ul>
+  <li>Pumps &amp; Tanks: show adding a pump, editing a price (price changes are snapshotted per reading, so history stays accurate), activating/deactivating.</li>
+  <li>Staff: show creating an attendant account and changing a role. <em>&ldquo;Access is role-based &mdash; an attendant cannot close a shift or see staff management.&rdquo;</em></li>
+</ul>
+
+<h2>Step 8 &mdash; Role demonstration (optional, 30 seconds)</h2>
+<ul>
+  <li>Sign out, sign in as <code>attendant@udyking.com</code> / <code>attendant123</code>.</li>
+  <li>Show that the navigation bar no longer shows Pumps &amp; Tanks or Staff, and that the reconciliation inputs are hidden. <em>&ldquo;The interface adapts to the role, and the API enforces it too &mdash; even a crafted request is rejected with 403.&rdquo;</em></li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 5 ==================== -->
+<h1>5. System Architecture &amp; Technology Choices</h1>
+
+<h2>5.1 Architecture overview</h2>
+<div class="formula">
+Browser (Next.js pages, React) &rarr; API Route Handlers (Next.js server functions) &rarr;
+Prisma ORM &rarr; PostgreSQL database
+</div>
+<ul>
+  <li><strong>Frontend:</strong> Next.js 15 App Router with React 19 server components. Pages render on the server with data fetched directly from the database; interactive forms are small client components that call the API.</li>
+  <li><strong>API layer:</strong> REST endpoints under <code>/api/*</code> (auth, shifts, readings, inventory, pumps, tanks, users, reports) &mdash; these are serverless functions on Vercel.</li>
+  <li><strong>ORM:</strong> Prisma &mdash; type-safe database access with parameterised queries (protection against SQL injection) and automatic migration files.</li>
+  <li><strong>Database:</strong> PostgreSQL &mdash; relational integrity, transactions, B-tree indexes, and persistent hosting on Vercel via Neon.</li>
+</ul>
+
+<h2>5.2 Monorepo layout (be ready to explain this)</h2>
+<table>
+  <tr><th>Folder</th><th>Purpose</th></tr>
+  <tr><td><code>apps/web</code></td><td>The Next.js application: pages (<code>src/app</code>), API routes (<code>src/app/api</code>), components, middleware, auth libraries.</td></tr>
+  <tr><td><code>packages/db</code></td><td>Prisma schema, migrations, seed script, and the shared database client used by the web app.</td></tr>
+  <tr><td><code>packages/shared</code></td><td>Shared TypeScript types, constants and formatters (roles, fuel types, currency/litre formatting) reused across the app.</td></tr>
+  <tr><td><code>vercel.json</code></td><td>Tells Vercel to build <code>apps/web</code> and run database migrations on every deploy.</td></tr>
+</table>
+<p>
+<strong>Why a monorepo?</strong> One repository, one install, one deployment. The frontend,
+API and database layer live together, shared code is imported directly (no version
+publishing), and the whole system deploys to Vercel as a single project &mdash; the user
+asked specifically for this so hosting is one click instead of managing separate servers.
+</p>
+
+<h2>5.3 Data model (six tables)</h2>
+<table>
+  <tr><th>Table</th><th>Key fields</th><th>Relations</th></tr>
+  <tr><td><code>User</code></td><td>name, email (unique), passwordHash, role (MANAGER / SUPERVISOR / ATTENDANT)</td><td>opens and closes shifts; records inventory checks</td></tr>
+  <tr><td><code>Pump</code></td><td>name (unique), fuelType (PMS/AGO/DPK), pricePerLiter, active</td><td>one pump &rarr; many readings</td></tr>
+  <tr><td><code>Tank</code></td><td>name, fuelType (unique), capacityLitres</td><td>one tank &rarr; many inventory checks</td></tr>
+  <tr><td><code>Shift</code></td><td>date, status (OPEN/CLOSED), openedBy, closedBy, totals</td><td>one shift &rarr; many readings</td></tr>
+  <tr><td><code>PumpReading</code></td><td>shift, pump, opening/closing meter readings, litresSold, price snapshot, expectedRevenue, cashReceived, posReceived, variance</td><td>unique per (shift, pump)</td></tr>
+  <tr><td><code>InventoryCheck</code></td><td>date, tank, openingLevel, receivedLitres, salesLitres, expectedClosing, closingLevel, varianceLitres</td><td>unique per (date, tank)</td></tr>
+</table>
+<p class="small">
+<strong>Talk point:</strong> financial integrity is enforced in the schema itself &mdash;
+a pump cannot appear twice in one shift, one tank can be checked once per day, and a shift
+can only be closed by an authorised supervisor or manager.
+</p>
+
+<h2>5.4 Why these technologies? (quick answers)</h2>
+<table>
+  <tr><th>Choice</th><th>Why</th></tr>
+  <tr><td>Next.js</td><td>One framework for pages, API routes, and server-side rendering; free hosting on Vercel; file-based routing keeps the codebase small.</td></tr>
+  <tr><td>React / TypeScript</td><td>Reusable components (charts, forms, tables) and compile-time type safety across the whole project.</td></tr>
+  <tr><td>PostgreSQL</td><td>Relational integrity for financial data, B-tree indexes for direct access, and persistence on Vercel&rsquo;s serverless platform (via Neon).</td></tr>
+  <tr><td>Prisma</td><td>Type-safe queries, parameterised SQL (SQL-injection safe), and versioned migrations stored in the repo.</td></tr>
+  <tr><td>Tailwind CSS</td><td>Fast, consistent, responsive UI without writing custom CSS files.</td></tr>
+  <tr><td>JWT + bcrypt</td><td>Stateless session token in an httpOnly cookie; bcrypt salted hashing for passwords.</td></tr>
+  <tr><td>npm workspaces (monorepo)</td><td>Single codebase, shared packages, single Vercel deployment.</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 6 ==================== -->
+<h1>6. The Direct-Access (Random Indexing) Argument</h1>
+<p>
+This is the intellectual core of the project, directly linked to your Statement of the
+Problem. Understand it deeply &mdash; expect at least one question about it.
+</p>
+
+<h2>6.1 The problem it solves</h2>
+<p>
+Manual ledgers and early automated systems store records sequentially: to retrieve a
+record you scan from the beginning until you find it. For a filling station generating
+hundreds of records per day, retrieving one month of history from a year of records means
+reading most of the year first. Retrieval time grows with the dataset (linear, O(n)).
+</p>
+
+<h2>6.2 How this system achieves direct access</h2>
+<ul>
+  <li><strong>Primary keys are hash-indexed identifiers.</strong> Every record (shift, reading, check, user) gets a unique key. The database maps that key directly to the record&rsquo;s physical location &mdash; a point lookup returns the record in <strong>O(1) constant time</strong> regardless of how many records exist. This is random access / direct addressing: no linear traversal, exactly the architecture your proposal describes.</li>
+  <li><strong>Range queries use B-tree indexes.</strong> Queries like <em>&ldquo;all sales between date A and date B&rdquo;</em> or <em>&ldquo;all readings for pump 3&rdquo;</em> are accelerated by B-tree indexes on date and foreign-key columns. A B-tree keeps keys sorted and self-balancing, so lookup and range scans run in <strong>O(log n)</strong> &mdash; finding data at &ldquo;day 300&rdquo; costs the same as finding &ldquo;day 3&rdquo;.</li>
+  <li><strong>The difference is observable in the reports module:</strong> selecting any 30-day window returns totals instantly because the database never scans records outside the indexed range.</li>
+</ul>
+
+<h2>6.3 Ready answers about indexes and complexity</h2>
+<ul>
+  <li><strong>What is a B-tree?</strong> A self-balancing tree data structure that stores sorted keys. Each node has many children, keeping the tree shallow; searches, inserts and deletes stay O(log n). It is the standard structure database engines use under their indexes. (This matches the B-tree definition in your Definition of Terms.)</li>
+  <li><strong>Where exactly are the indexes in your schema?</strong> Unique indexes on the primary keys of all six tables; a unique compound index on <code>(shiftId, pumpId)</code> for readings and <code>(date, tankId)</code> for inventory checks; additional indexes on <code>pumpId</code> and <code>tankId</code> foreign keys. Date columns are indexed implicitly through the compound keys and query patterns.</li>
+  <li><strong>Is it really O(1)?</strong> For primary-key lookups, yes &mdash; the database resolves the key to a location directly (hash or B-tree root descent). For range queries it is O(log n + k) where k is the number of returned rows &mdash; still logarithmic, never a full scan.</li>
+  <li><strong>What would happen if you used the old sequential approach?</strong> The reports query would read every stored record every time, and the time to answer would grow linearly with business age &mdash; the exact &ldquo;compounding retrieval latency&rdquo; your problem statement describes.</li>
+</ul>
+
+<div class="tip">
+<strong>Key sentence to say:</strong> &ldquo;Direct access means the system&rsquo;s response
+time is independent of how long the station has been operating &mdash; the first day and
+the 1,000th day answer at the same speed.&rdquo;
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 7 ==================== -->
+<h1>7. Page-by-Page Guide: What Each Page Does &amp; How to Use It</h1>
+
+<div class="feature">
+  <h3>7.1 Login Page (<code>/login</code>)</h3>
+  <p class="facts"><strong>Access:</strong> Public (no session required) &nbsp;|&nbsp; <strong>Roles:</strong> All &nbsp;|&nbsp; <strong>API:</strong> <code>POST /api/auth/login</code></p>
+  <p><strong>What it does:</strong> Authenticates station staff by email and password. On success the server verifies the password hash (bcrypt), issues a signed JWT containing the user id and role, and stores it in an httpOnly, same-site session cookie (7-day expiry). The user is then redirected to the dashboard (or the page they originally requested).</p>
+  <p><strong>How to use:</strong> Enter the account email and password, click Sign in. Invalid credentials show a generic &ldquo;Invalid email or password&rdquo; (no account enumeration). An already-authenticated visitor is redirected away automatically.</p>
+</div>
+
+<div class="feature">
+  <h3>7.2 Dashboard (<code>/dashboard</code>)</h3>
+  <p class="facts"><strong>Access:</strong> All roles &nbsp;|&nbsp; <strong>Data:</strong> read from all six tables</p>
+  <p><strong>What it does:</strong> The management overview. Four stat cards (today&rsquo;s litres sold, today&rsquo;s expected revenue, open-shift status, active pump count), a 7-day revenue bar chart, the current open shift&rsquo;s status, the five most recent product-loss alerts (negative tank variances), and the five most recent shifts with their variance highlighted.</p>
+  <p><strong>How to use:</strong> Read-only. Use the buttons to jump into Shift Sales or continue the open shift. Alerts in red deserve investigation first thing each morning.</p>
+</div>
+
+<div class="feature">
+  <h3>7.3 Shift Sales (<code>/sales</code>) &mdash; the core workflow</h3>
+  <p class="facts"><strong>Access:</strong> All roles (closing restricted to Supervisor/Manager) &nbsp;|&nbsp; <strong>API:</strong> <code>POST /api/shifts</code>, <code>POST /api/shifts/[id]/readings</code>, <code>POST /api/shifts/[id]/close</code></p>
+  <p><strong>What it does:</strong> Manages the daily shift lifecycle.</p>
+  <ol>
+    <li><strong>No open shift:</strong> shows an &ldquo;Open Today&rsquo;s Shift&rdquo; card. Only one shift can be open at a time (the API rejects a second one &mdash; server-side guard).</li>
+    <li><strong>Open shift board:</strong> one row per active pump. The attendant enters the pump&rsquo;s opening and closing meter readings; litres sold and expected revenue compute live in the browser and are re-validated on the server. Opening readings are prefilled from the previous day&rsquo;s closing.</li>
+    <li><strong>Reconciliation (Supervisor/Manager only):</strong> cash and POS collected per pump are entered; the variance per pump and the shift totals update live. &ldquo;Close Shift &amp; Reconcile&rdquo; locks the shift, records who closed it and when, and moves it to history.</li>
+    <li><strong>History table:</strong> the ten most recent closed shifts with expected/actual/variance and a link to the full detail page.</li>
+  </ol>
+  <p><strong>How to use (attendant):</strong> open shift &rarr; read the pump meters at opening and at close &rarr; type both readings &rarr; Save. <strong>(supervisor):</strong> count the cash, collect POS receipts &rarr; enter per pump &rarr; check the variance &rarr; Close.</p>
+</div>
+
+<div class="feature">
+  <h3>7.4 Shift Detail (<code>/sales/[id]</code>)</h3>
+  <p class="facts"><strong>Access:</strong> All roles &nbsp;|&nbsp; <strong>API:</strong> <code>GET /api/shifts/[id]</code></p>
+  <p><strong>What it does:</strong> Read-only, printable breakdown of one shift: who opened and closed it and when, every pump&rsquo;s readings, litres, expected revenue, cash, POS and variance, with totals. This is the audit record for any dispute or audit request.</p>
+  <p><strong>How to use:</strong> Open from Shift Sales history (View) or the dashboard&rsquo;s recent shifts. Back button returns to Shift Sales.</p>
+</div>
+
+<div class="feature">
+  <h3>7.5 Inventory &amp; Storage Control (<code>/inventory</code>)</h3>
+  <p class="facts"><strong>Access:</strong> All roles (recording restricted to Supervisor/Manager) &nbsp;|&nbsp; <strong>API:</strong> <code>GET/POST /api/inventory</code></p>
+  <p><strong>What it does:</strong> Volumetric reconciliation of underground tanks against recorded pump sales. The form takes the date, tank, dip opening level, litres received, and dip closing level. The system computes pump sales for that fuel on that date, then expected closing = opening + received &minus; sales, and flags the difference as a loss (closing below expected) or surplus. History shows every check with OK / loss / surplus badges.</p>
+  <p><strong>How to use:</strong> Each day (or per shift), dip each tank, enter the levels, save. Watch the loss column: consistent negative variance on one tank points to a leak, evaporation, or unrecorded discharge that needs physical investigation.</p>
+</div>
+
+<div class="feature">
+  <h3>7.6 Reports (<code>/reports</code>)</h3>
+  <p class="facts"><strong>Access:</strong> All roles &nbsp;|&nbsp; <strong>API:</strong> <code>GET /api/reports/sales</code>, <code>GET /api/reports/inventory</code></p>
+  <p><strong>What it does:</strong> Three report tabs over any date range:</p>
+  <ul>
+    <li><strong>Daily Sales:</strong> total litres, expected revenue, cash, POS and net variance; revenue-per-day chart and a per-day table.</li>
+    <li><strong>Monthly Summary:</strong> the same aggregates grouped by month &mdash; the basis for monthly financial audits.</li>
+    <li><strong>Inventory:</strong> all tank checks in the range with net loss/surplus totals.</li>
+  </ul>
+  <p><strong>How to use:</strong> Pick From/To dates, click Run Report. Defaults to the last 30 days.</p>
+</div>
+
+<div class="feature">
+  <h3>7.7 Pumps &amp; Tanks (<code>/pumps</code>) &mdash; Manager only</h3>
+  <p class="facts"><strong>Access:</strong> Manager &nbsp;|&nbsp; <strong>API:</strong> <code>/api/pumps</code>, <code>/api/tanks</code></p>
+  <p><strong>What it does:</strong> Configures the station&rsquo;s physical assets. Pumps: name, fuel type, price per litre (click the price to edit), activate/deactivate, delete (only if it has no sales history). Tanks: name, fuel type (one tank per fuel), capacity, delete (only if unused).</p>
+  <p><strong>How to use:</strong> Add a new pump before it starts operating; update the price when the station price changes &mdash; the price is snapshotted onto each reading, so historical revenue is never rewritten. Deactivate, don&rsquo;t delete, a pump with history &mdash; this preserves the audit trail.</p>
+</div>
+
+<div class="feature">
+  <h3>7.8 Staff (<code>/users</code>) &mdash; Manager only</h3>
+  <p class="facts"><strong>Access:</strong> Manager &nbsp;|&nbsp; <strong>API:</strong> <code>/api/users</code>, <code>/api/users/[id]</code></p>
+  <p><strong>What it does:</strong> Creates staff accounts (name, email, password, role), changes roles, resets passwords, deletes accounts that have no record history. The manager cannot change their own role or delete their own account (self-protection).</p>
+  <p><strong>How to use:</strong> Add each staff member with the role matching their duty; when an attendant is promoted to supervisor, change the role so reconciliation permission moves with them.</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 8 ==================== -->
+<h1>8. Roles &amp; Permission Matrix</h1>
+<table>
+  <tr><th>Capability</th><th>Attendant</th><th>Supervisor</th><th>Manager</th></tr>
+  <tr><td>View dashboard, sales, inventory, reports</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+  <tr><td>Open a shift</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+  <tr><td>Enter / update pump readings</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+  <tr><td>Enter cash/POS and close (reconcile) a shift</td><td>&mdash;</td><td>&#10003;</td><td>&#10003;</td></tr>
+  <tr><td>Record inventory checks</td><td>&mdash;</td><td>&#10003;</td><td>&#10003;</td></tr>
+  <tr><td>Manage pumps, tanks and prices</td><td>&mdash;</td><td>&mdash;</td><td>&#10003;</td></tr>
+  <tr><td>Manage staff accounts and roles</td><td>&mdash;</td><td>&mdash;</td><td>&#10003;</td></tr>
+</table>
+<p class="small">
+<strong>Enforcement points (say this in the defence):</strong> permissions are enforced in
+three layers &mdash; (1) the UI hides restricted controls per role, (2) every API route
+calls <code>requireUser([...])</code> and returns 403 for unauthorised roles, and (3) the
+navigation middleware verifies the session on every protected request. Hiding a button is
+never the security boundary &mdash; the server is.
+</p>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 9 ==================== -->
+<h1>9. Key Formulas &amp; Calculations</h1>
+<div class="formula">Litres sold = Closing meter reading &minus; Opening meter reading</div>
+<div class="formula">Expected revenue = Litres sold &times; Price per litre (snapshot at time of reading)</div>
+<div class="formula">Cash variance (per pump) = Expected revenue &minus; (Cash collected + POS collected)</div>
+<div class="formula">Shift totals: expectedTotal = &Sigma; expected; actualTotal = &Sigma; (cash + POS); varianceTotal = &Sigma; variance</div>
+<div class="formula">Inventory: Expected closing level = Opening level + Litres received &minus; Pump sales (same fuel, same date)</div>
+<div class="formula">Inventory variance = Actual closing level &minus; Expected closing level &nbsp; (negative = loss/shrinkage; positive = surplus)</div>
+<p><strong>Validation rules the panel may probe:</strong></p>
+<ul>
+  <li>Closing reading &lt; opening reading is rejected (400 error) &mdash; prevents nonsense negative litres.</li>
+  <li>Negative cash or POS is rejected.</li>
+  <li>Only one open shift at a time, enforced server-side.</li>
+  <li>Reconciliation is only possible after readings are saved, and only while the shift is OPEN.</li>
+  <li>Closed shifts are immutable &mdash; no edits after closing (audit integrity).</li>
+  <li>One inventory check per tank per day (upsert), so re-entering a day corrects rather than duplicates.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 10 ==================== -->
+<h1>10. Security Measures (be ready to explain each)</h1>
+<table>
+  <tr><th>Threat</th><th>Countermeasure in this system</th></tr>
+  <tr><td>Password theft</td><td>bcrypt salted hashing (cost factor 10); plaintext passwords never stored; passwords never returned by the API.</td></tr>
+  <tr><td>Session hijacking via XSS</td><td>Session token stored in an <strong>httpOnly</strong> cookie &mdash; JavaScript cannot read it, so even a successful script injection cannot steal the session.</td></tr>
+  <tr><td>Token forgery</td><td>JWT signed with a server-side secret (HS256, <code>JWT_SECRET</code>); forged or expired tokens are rejected.</td></tr>
+  <tr><td>CSRF</td><td>SameSite=Lax cookie, JSON-only APIs, and no cookie-authenticated state-changing requests from foreign origins.</td></tr>
+  <tr><td>SQL injection</td><td>All queries go through Prisma&rsquo;s parameterised query engine &mdash; user input is never concatenated into SQL.</td></tr>
+  <tr><td>Stored/reflected XSS</td><td>React escapes all rendered values by default; user-entered text is treated as data, never markup.</td></tr>
+  <tr><td>Privilege escalation</td><td>Role checks on every API route (<code>requireUser(roles)</code>); the UI hiding controls is cosmetic, the server rejects.</td></tr>
+  <tr><td>Account enumeration</td><td>Login failures return a generic message; registration of duplicate emails is the only user-exposed difference, which is unavoidable and standard.</td></tr>
+  <tr><td>Self-lockout / admin abuse</td><td>A manager cannot delete their own account or change their own role.</td></tr>
+  <tr><td>Input errors / bad data</td><td>Zod schema validation on every API body and query before any database write.</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 11 ==================== -->
+<h1>11. Defence Question Bank (40 questions with model answers)</h1>
+
+<h2>11.1 Opening / general questions</h2>
+
+<div class="qa">
+  <div class="question">Q1. Summarise your project in 2&ndash;3 sentences.<span class="qtag">Opening</span></div>
+  <div class="answer"><p>Use the 30-second pitch from Section 2, trimmed: problem (manual ledgers and slow sequential systems), solution (direct-access financial information system for a filling station), result (role-based web app: sales logging, cash reconciliation, tank inventory control, reports).</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q2. Why did you choose a filling station as your case study?<span class="qtag">Motivation</span></div>
+  <div class="answer"><p>Filling stations are high-volume, low-margin, cash-intensive businesses where small leakages matter. Three pressures make them a strong case: daily sales on multiple pumps, cash-heavy payment mix where diversion is easy, and underground tanks where product can disappear silently through leaks or theft. Those are exactly the problems my three modules address &mdash; sales logging, reconciliation, and volumetric inventory control. And the motivation is personal: I want to build technology that directly supports SME owners with a scalable, affordable system.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q3. How is this different from using Excel or a simple spreadsheet?<span class="qtag">Motivation</span></div>
+  <div class="answer"><p>Four differences: (1) integrity &mdash; the database schema enforces rules (one open shift, unique readings per pump, non-negative values) that a spreadsheet cannot; (2) access control &mdash; role-based permissions stop an attendant from altering reconciliation figures; (3) auditability &mdash; every record knows who created it and when; (4) retrieval performance &mdash; indexed queries return any historical range instantly, while a spreadsheet over thousands of rows slows down and corrupts easily. Excel is a single-user document; this is a multi-user information system.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q4. Who are the users of your system?<span class="qtag">Scope</span></div>
+  <div class="answer"><p>On-site operational staff only: pump attendants (open shifts, enter meter readings), sales supervisors (reconciliation, inventory checks), and the station manager (configuration, staff accounts, reports). Per the project scope, it is deliberately local to one outlet, not a multi-station network.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q5. What problem does the system solve in plain terms?<span class="qtag">Motivation</span></div>
+  <div class="answer"><p>Cash and fuel disappearing without the owner knowing, and history being slow to retrieve. Manual tallies make it hard to spot a missing naira; tank dips at the end of the month are the only way losses were noticed. This system flags discrepancies daily &mdash; expected revenue versus cash collected, and physical tank depletion versus recorded sales &mdash; while the owner can pull any day&rsquo;s figures instantly.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q6. What scope did you deliberately exclude?<span class="qtag">Scope</span></div>
+  <div class="answer"><p>Payroll and staff remuneration, broad enterprise accounting (balance sheets, tax computations, depreciation), and automated hardware telemetry. Data entry is manual through the web interface, as stated in the delimitations. Excluding them kept the project focused and achievable while still solving the core cash-and-inventory problem.</p></div>
+</div>
+
+<h2>11.2 Architecture and database questions</h2>
+
+<div class="qa">
+  <div class="question">Q7. Explain your system architecture.<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>Three tiers in one deployable unit: a Next.js frontend (React server components rendering pages), a REST API layer (Next.js route handlers under /api), and PostgreSQL accessed through the Prisma ORM. In the monorepo, packages/db owns the schema and migrations, packages/shared owns shared types, and apps/web is the application. On Vercel, all of this runs as serverless functions connected to a hosted Postgres database, so there is no separate backend server to manage.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q8. Why Next.js instead of just React?<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>Next.js gives me three things in one framework: server-side rendering (pages can read the database directly, so the dashboard loads with data, not after a client fetch), API route handlers (so the backend lives in the same codebase and deploys together), and a file-based router that keeps the project small. It also integrates natively with Vercel hosting, which was a requirement of the project.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q9. Why a monorepo? What does each part do?<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>One repository containing the web app, the database package and the shared package. The database package centralises the Prisma schema and migrations so one migration history exists; the shared package removes duplicated types and formatters; the web app imports both directly via npm workspaces. The result is a single project on Vercel &mdash; one build, one domain &mdash; which the project brief required.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q10. Why PostgreSQL and not MySQL or SQLite?<span class="qtag">Database</span></div>
+  <div class="answer"><p>Three reasons: relational integrity for financial data (foreign keys, unique constraints, transactions), B-tree indexing for the direct-access requirement, and deployment &mdash; Vercel&rsquo;s serverless filesystem is ephemeral, so the database must be hosted; Postgres on Neon is the natural choice. The proposal mentioned MySQL; Prisma supports both, so the schema could switch providers with a configuration change, but Postgres was chosen for the hosting story.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q11. Explain how your system achieves direct access / random indexing.<span class="qtag">Core concept</span></div>
+  <div class="answer"><p>Every record is stored with a unique primary key that the database maps directly to a storage location &mdash; a point lookup is O(1) regardless of dataset size. For range queries, B-tree indexes on dates and foreign keys give O(log n) access. So retrieving sales from 300 days into operation costs the same as retrieving yesterday&rsquo;s &mdash; the sequential bottleneck from the problem statement is eliminated. The reports module demonstrates this: any date window returns totals instantly.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q12. What is a B-tree and where is it used in your system?<span class="qtag">Core concept</span></div>
+  <div class="answer"><p>A self-balancing sorted tree where each node holds many keys, keeping the tree shallow, so search, insert and delete are O(log n). The database engine builds B-tree indexes behind my unique keys and compound indexes (shiftId + pumpId for readings, date + tankId for inventory checks). Every query that filters on those columns walks the index instead of scanning the table.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q13. Draw/explain your database schema.<span class="qtag">Database</span></div>
+  <div class="answer"><p>Six tables: User, Pump, Tank, Shift, PumpReading, InventoryCheck. A Shift has many PumpReadings (one per pump, enforced by a unique constraint). A reading stores meter readings, litres, the price snapshot and expected revenue, plus cash, POS and variance filled at reconciliation. InventoryCheck is unique per tank per day. Users relate to shifts they opened/closed and checks they recorded &mdash; the audit trail.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q14. How do the pages and the API communicate?<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>Most pages are server components that query the database directly through Prisma on the server &mdash; the page HTML ships with data already. Interactive actions (saving readings, closing a shift, creating a user) are handled by small client components that POST JSON to the API routes; the server validates with Zod, enforces roles, writes with Prisma, and returns JSON; the page then refreshes. Reports are client-side and fetch from the report APIs with date parameters.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q15. What is an API route handler?<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>A server function defined by a file in the app/api directory that receives an HTTP request and returns an HTTP response &mdash; e.g. POST /api/shifts/[id]/close closes a shift. On Vercel each handler becomes a serverless function. This keeps the whole backend in the same TypeScript codebase as the frontend.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q16. How do you handle concurrency, e.g. two attendants opening shifts at once?<span class="qtag">Architecture</span></div>
+  <div class="answer"><p>The invariant &ldquo;at most one OPEN shift&rdquo; is enforced in the database layer: the API checks for an existing open shift before creating, and the business rule is also encoded in the application logic. For typical station scale (one or two staff per shift) this is sufficient; if needed it could be hardened with a partial unique index on status = OPEN.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q17. Why store a price snapshot on each reading instead of just referencing the pump&rsquo;s current price?<span class="qtag">Design decision</span></div>
+  <div class="answer"><p>Because fuel prices change. If the manager updates the price today, historical readings must still show the revenue actually expected on that day. By copying pricePerLiter onto each reading at save time, history is immutable and reports stay correct &mdash; this is a standard accounting principle: store the transaction facts as they were.</p></div>
+</div>
+
+<h2>11.3 Security questions</h2>
+
+<div class="qa">
+  <div class="question">Q18. How does authentication work?<span class="qtag">Security</span></div>
+  <div class="answer"><p>On login, the server compares the submitted password against the bcrypt hash in the database. On success it signs a JWT containing the user id and role, with a 7-day expiry, and sets it in an httpOnly, SameSite=Lax cookie. Every subsequent request verifies the token signature and expiry; the middleware guards protected pages and API routes, and route handlers re-verify the role. Logout deletes the cookie.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q19. Why is the session in a cookie and not in localStorage?<span class="qtag">Security</span></div>
+  <div class="answer"><p>localStorage is readable by any JavaScript on the page, so a single XSS vulnerability would leak the session token. An httpOnly cookie is invisible to JavaScript &mdash; it is sent automatically with requests and can only be set by the server. That is the standard, safer choice for session material.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q20. How do you prevent SQL injection?<span class="qtag">Security</span></div>
+  <div class="answer"><p>All database access goes through the Prisma ORM, which uses parameterised queries &mdash; user input is bound as parameters, never concatenated into SQL strings. Combined with Zod validation of every API input, there is no path for an attacker&rsquo;s input to alter the query structure.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q21. How is role-based access enforced?<span class="qtag">Security</span></div>
+  <div class="answer"><p>In three layers: the UI conditionally renders privileged controls; the navigation middleware verifies the session on every protected route; and every API handler calls requireUser(roles) before doing anything &mdash; unauthorised roles receive 403. Server-side enforcement is the real boundary; the UI is only convenience. I demonstrated this: an attendant&rsquo;s close-shift request is rejected with 403 even if crafted directly.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q22. How are passwords stored?<span class="qtag">Security</span></div>
+  <div class="answer"><p>With bcrypt at cost factor 10 &mdash; a salted, computationally expensive one-way hash. The plaintext never touches the database or any response; even the API only ever returns the user&rsquo;s id, name, email and role.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q23. What about XSS and CSRF?<span class="qtag">Security</span></div>
+  <div class="answer"><p>For XSS: React escapes all rendered values by default, so stored names or messages are treated as text, not markup. For CSRF: the session cookie is SameSite=Lax, and state-changing calls are JSON-only APIs, which a cross-site form cannot send; combined with the JSON content-type requirement, a cross-origin attacker cannot forge state changes.</p></div>
+</div>
+
+<h2>11.4 Functional / domain questions</h2>
+
+<div class="qa">
+  <div class="question">Q24. Walk me through the daily sales workflow.<span class="qtag">Domain</span></div>
+  <div class="answer"><p>An attendant opens the shift; the system stamps who and when. The attendant records each pump&rsquo;s opening and closing meter readings; litres and expected revenue compute automatically at the pump&rsquo;s price snapshot. At close, a supervisor enters cash and POS per pump; the system flags any variance versus expected revenue. Closing locks the shift with totals and the auditor&rsquo;s identity, and the record flows into history and reports.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q25. How do you detect theft or leakage of fuel?<span class="qtag">Domain</span></div>
+  <div class="answer"><p>Through volumetric reconciliation. For each tank and day: expected closing = opening dip + litres received &minus; litres the pumps recorded. If the physical dip closing is below expected closing, product is missing &mdash; either a leak, evaporation, or unrecorded discharge. Negative variances are highlighted in red on the inventory page and surfaced as alerts on the dashboard so the owner investigates the same day instead of discovering it at month-end.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q26. What happens when cash collected does not match expected revenue?<span class="qtag">Domain</span></div>
+  <div class="answer"><p>The variance is computed per pump and per shift and shown immediately in red. The system does not judge &mdash; it flags, so the supervisor can investigate (e.g. an unattended sale, a pricing change, a faulty pump) before closing. The variance is stored with the shift for the audit trail and appears in reports.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q27. What validation prevents bad data?<span class="qtag">Domain</span></div>
+  <div class="answer"><p>Server-side: closing readings cannot be less than opening readings, cash/POS cannot be negative, dates must be valid, one open shift at a time, reconciliation only after readings exist, one inventory check per tank per day. Every input is validated with Zod before reaching the database, so validation can never be bypassed by editing the browser.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q28. Can an attendant fix a wrong reading?<span class="qtag">Domain</span></div>
+  <div class="answer"><p>Yes &mdash; while the shift is open, readings can be re-saved (the record is updated in place, unique per pump). Once the supervisor closes the shift, it is locked and no edits are allowed, preserving the integrity of the audit trail. This mirrors real practice: correct before sign-off, not after.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q29. Why Float for money instead of Decimal?<span class="qtag">Design decision</span></div>
+  <div class="answer"><p>Honest answer: simplicity. The values are rounded to two decimals everywhere, and the magnitudes at station scale (up to tens of millions of naira) are well within float precision for the rounding used. I noted in the design that Decimal is the stricter accounting choice and would be the improvement if precision at the kobo level ever mattered &mdash; Prisma supports Decimal natively, so the change is localised.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q30. What happens if the system is closed mid-shift (e.g. power cut)?<span class="qtag">Domain</span></div>
+  <div class="answer"><p>Nothing is lost: readings are saved to the database the moment &ldquo;Save&rdquo; is clicked, and the shift remains OPEN until explicitly closed. On reopening the app, the open shift resumes with its saved readings. Since it is a web application, the attendant could even continue from another device on the same network.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q31. How are dates and time zones handled?<span class="qtag">Design decision</span></div>
+  <div class="answer"><p>All date values are normalised to local midnight at the point of entry (a start-of-day helper) before storage, so a &ldquo;shift for 2 August&rdquo; is always stored as 2 August, and day/month grouping is consistent across the app regardless of the server time zone. Time-of-day fields (openedAt, closedAt) are stored as timestamps.</p></div>
+</div>
+
+<h2>11.5 Business impact and evaluation questions</h2>
+
+<div class="qa">
+  <div class="question">Q32. How does this benefit the station owner financially?<span class="qtag">Impact</span></div>
+  <div class="answer"><p>Three ways: detection of revenue leakage (variance flagging), detection of product loss (volumetric reconciliation), and structured records that make the business bankable &mdash; an auditable digital ledger supports loan applications and tax compliance, which the proposal lists as a national-economy benefit. Faster daily reconciliation also frees staff time.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q33. How did you evaluate the system against your objectives?<span class="qtag">Evaluation</span></div>
+  <div class="answer"><p>Objective 1 (direct-access database + friendly UI): delivered &mdash; the schema uses indexed primary/foreign keys and the interface is role-based; retrieval is instant in reports. Objective 2 (full-stack implementation): delivered &mdash; Next.js + TypeScript + Prisma + PostgreSQL in a monorepo. Objective 3 (evaluate accuracy and usability): I seeded realistic transaction data and verified that every computed figure (litres, revenue, variance, inventory loss) matches manual recalculation, and that reports reconcile exactly with the stored shifts.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q34. How scalable is this system?<span class="qtag">Impact</span></div>
+  <div class="answer"><p>The architecture scales in three directions: data volume (indexed queries stay logarithmic as years of history accumulate), users (serverless functions scale automatically), and stations (the schema already separates pumps, tanks and users; adding a stationId column and an extra foreign key would extend it to multi-branch use). That said, the current scope is deliberately one outlet.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q35. What does it cost to run?<span class="qtag">Impact</span></div>
+  <div class="answer"><p>Near zero at this scale: Vercel&rsquo;s hobby tier hosts the app, and a free-tier hosted Postgres (Neon) holds the data. For an SME this is effectively a low-cost solution &mdash; matching the proposal&rsquo;s requirement that SMEs need affordable technology.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q36. How did you test the system?<span class="qtag">Evaluation</span></div>
+  <div class="answer"><p>Four levels: (1) schema-level &mdash; unique constraints and enums; (2) API-level &mdash; I exercised every endpoint with curl, including negative cases (401 unauthenticated, 403 wrong role, 400 bad readings); (3) end-to-end &mdash; a full day&rsquo;s cycle: open shift, save readings, reconcile, close, verify shift totals and the report output; (4) seed-based &mdash; 8 days of realistic data verified against manual arithmetic.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q37. What are the limitations of the current system?<span class="qtag">Evaluation</span></div>
+  <div class="answer"><p>Manual data entry only (no pump telemetry or tank gauge integration), single-station scope, no payroll or full accounting modules, and float arithmetic rather than exact decimal for money. Each is documented; the telemetry and multi-station items are future work, and I&rsquo;ve been explicit that the system targets operational cash-and-inventory control, not full enterprise accounting.</p></div>
+</div>
+
+<h2>11.6 Future work and closing questions</h2>
+
+<div class="qa">
+  <div class="question">Q38. What would you add next if you continued the project?<span class="qtag">Future</span></div>
+  <div class="answer"><p>Priority order: (1) automated tank telemetry and pump data to remove manual entry; (2) multi-station support with consolidated owner reporting; (3) CSV/PDF export of reports for auditors; (4) payroll and credit-customer ledger modules to broaden the accounting scope; (5) an offline-first mobile app or PWA so attendants can work during network outages; (6) shift-transfer locking so only the attendant on duty can edit their readings.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q39. What did you personally learn from this project?<span class="qtag">Closing</span></div>
+  <div class="answer"><p>End-to-end software engineering: translating a real business problem into a data model, designing an API, building a UI for non-technical users, and hardening it with validation and role-based security. I also learned that architecture decisions (direct access, hosting, monorepo) are answers to real constraints, and that honest scoping &mdash; deciding what not to build &mdash; is as important as deciding what to build.</p></div>
+</div>
+
+<div class="qa">
+  <div class="question">Q40. If you had to start over, what would you do differently?<span class="qtag">Closing</span></div>
+  <div class="answer"><p>I would prototype the data model earlier and validate it against the real station&rsquo;s daily forms before writing the UI, and I would add automated tests from day one rather than after the fact. I would also use Decimal for monetary columns from the start to be strictly accounting-correct, and design the station/tank relationships to allow multi-branch growth from the beginning.</p></div>
+</div>
+
+<div class="warn">
+<strong>Stretch questions (harder, for preparation):</strong> &ldquo;What happens to variance if a pump gives free litres due to a fault?&rdquo; (the variance becomes positive on that pump &mdash; cash collected exceeds expected; the flag prompts a pump calibration check). &ldquo;How would you prevent an attendant from creating a fake zero-reading shift?&rdquo; (role separation &mdash; only supervisors close; a supervisor would still need collusion; audit trail shows who opened). &ldquo;What if two shifts were opened on different dates by mistake?&rdquo; (open-shift guard is global, so only one can exist; the wrong one must be closed with a zeroed reconciliation &mdash; documented process gap I would address with a &lsquo;discard shift&rsquo; permission for managers). &ldquo;How would you handle the database filling up?&rdquo; (partitioning by date or archiving closed shifts older than N years).
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 12 ==================== -->
+<h1>12. Evaluation Against Project Objectives</h1>
+<p>Map your proposal&rsquo;s three objectives directly &mdash; write these on your evaluation slide:</p>
+<table>
+  <tr><th style="width:33%">Objective (from proposal)</th><th>How it was fulfilled</th><th>Evidence</th></tr>
+  <tr>
+    <td>1. Design a direct-access database structure and user-friendly web interface for entering fuel sales and monitoring inventory.</td>
+    <td>Six-table relational schema with primary-key and B-tree indexes; role-based web interface with dedicated Sales and Inventory modules.</td>
+    <td>Schema file (<code>schema.prisma</code>); Shift Sales and Inventory pages; instant range queries.</td>
+  </tr>
+  <tr>
+    <td>2. Implement a functional web-based system using a full-stack approach (HTML/CSS, JavaScript, server-side language, relational database).</td>
+    <td>Next.js (React/TypeScript/Tailwind) frontend, Next.js API handlers as the server side, Prisma ORM, PostgreSQL database &mdash; in a monorepo.</td>
+    <td>Running application; 14 API routes; migration history; deployed architecture on Vercel.</td>
+  </tr>
+  <tr>
+    <td>3. Assess operational efficiency, data accuracy and user-friendliness using simulated or actual transaction data.</td>
+    <td>Seeded 8 days of realistic transactions; verified every computed figure against manual arithmetic; exercised role restrictions and error paths.</td>
+    <td>Reconciliation totals match manual recalculation; variance and loss detection verified; role matrix tests (401/403/400 cases).</td>
+  </tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 13 ==================== -->
+<h1>13. Limitations &amp; Future Work</h1>
+
+<h2>13.1 Honest limitations (say them before the panel asks)</h2>
+<ul>
+  <li>Data entry is manual &mdash; no connection to pump or tank-gauge hardware.</li>
+  <li>Single-outlet scope (per the delimitations).</li>
+  <li>No payroll, tax computation, balance sheet or full external audit module.</li>
+  <li>Money stored as Float (rounded), not exact Decimal.</li>
+  <li>No automated test suite (validated manually and via API scripts).</li>
+  <li>No offline mode &mdash; requires network connectivity.</li>
+</ul>
+
+<h2>13.2 Future work (realistic, prioritised)</h2>
+<ol>
+  <li>Hardware telemetry integration (digital tank gauges, pump consoles) to remove manual entry.</li>
+  <li>Multi-station support with consolidated reporting for a chain of outlets.</li>
+  <li>CSV / PDF report export for auditors and banks.</li>
+  <li>Credit-sales (customer ledger) and payroll modules.</li>
+  <li>Offline-first mobile PWA for attendants.</li>
+  <li>Automated tests (unit + end-to-end) and Decimal monetary columns.</li>
+</ol>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 14 ==================== -->
+<h1>14. Presentation Tips &amp; Common Pitfalls</h1>
+
+<h2>Do</h2>
+<ul>
+  <li>Rehearse the demo at least three times, including the failure path (re-seed if data was modified).</li>
+  <li>Open with one sentence that states the problem and the deliverable.</li>
+  <li>Use the live system as your slides for the demo portion.</li>
+  <li>Connect every technology answer back to a project requirement.</li>
+  <li>Pause after each answer; invite follow-up.</li>
+  <li>Keep a printed copy of this guide and the README with you.</li>
+</ul>
+
+<h2>Don&rsquo;t</h2>
+<ul>
+  <li>Don&rsquo;t claim features that don&rsquo;t exist (no telemetry, no payroll, no multi-station).</li>
+  <li>Don&rsquo;t read slides or code line-by-line.</li>
+  <li>Don&rsquo;t say &ldquo;I just copied the code&rdquo; &mdash; be able to explain any function the panel points at.</li>
+  <li>Don&rsquo;t memorise answers word-for-word &mdash; memorise the structure (point, proof, why).</li>
+  <li>Don&rsquo;t leave the demo unprepared: browser crashed &rarr; reopen; database reset &rarr; one command; both covered in Section 4.</li>
+</ul>
+
+<h2>Emergency cheat sheet (30 seconds before the defence)</h2>
+<ul>
+  <li>4 pumps (2 PMS, 1 AGO, 1 DPK) &middot; 3 tanks &middot; 3 roles &middot; 6 tables &middot; 14 API routes.</li>
+  <li>Core formula: variance = expected revenue &minus; (cash + POS); inventory loss = actual dip &minus; expected dip.</li>
+  <li>Core claim: O(1) point lookups, O(log n) range queries &mdash; no sequential scanning.</li>
+  <li>Stack: Next.js + TypeScript + Tailwind + Prisma + PostgreSQL, monorepo, one Vercel deployment.</li>
+  <li>Security: bcrypt, httpOnly JWT cookie, role checks server-side, parameterised queries, Zod validation.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ==================== SECTION 15 ==================== -->
+<h1>15. Glossary of Key Terms</h1>
+<table>
+  <tr><th style="width:30%">Term</th><th>Meaning (in your own words)</th></tr>
+  <tr><td>Financial Information System (FIS)</td><td>A software system that collects, processes, stores and retrieves financial data to support an organisation&rsquo;s operations and decision-making.</td></tr>
+  <tr><td>Direct access / random indexing</td><td>Retrieving any record directly from its stored location (via its key) without reading preceding records.</td></tr>
+  <tr><td>Sequential record processing</td><td>Reading records in storage order from the start; retrieval time grows with dataset size.</td></tr>
+  <tr><td>Constant-time complexity (O(1))</td><td>An operation whose time does not change as the dataset grows &mdash; e.g. looking up a record by primary key.</td></tr>
+  <tr><td>B-tree indexing</td><td>A self-balancing tree that keeps sorted keys; searches and range scans run in O(log n).</td></tr>
+  <tr><td>Volumetric inventory reconciliation</td><td>Comparing recorded pump sales with physical tank levels to detect losses.</td></tr>
+  <tr><td>ORM (Object-Relational Mapper)</td><td>A layer that lets code work with database records as typed objects (Prisma).</td></tr>
+  <tr><td>API route handler</td><td>A server function that responds to an HTTP request path (e.g. POST /api/shifts).</td></tr>
+  <tr><td>Serverless function</td><td>Backend code that runs on demand on the hosting platform and scales automatically (Vercel).</td></tr>
+  <tr><td>JWT (JSON Web Token)</td><td>A signed, time-limited token carrying the user&rsquo;s identity and role.</td></tr>
+  <tr><td>bcrypt</td><td>A salted, computationally expensive password-hashing algorithm.</td></tr>
+  <tr><td>Role-based access control (RBAC)</td><td>Restricting actions based on a user&rsquo;s assigned role (Manager/Supervisor/Attendant).</td></tr>
+  <tr><td>Schema validation (Zod)</td><td>Declarative runtime validation of API inputs before they touch the database.</td></tr>
+  <tr><td>Migration</td><td>A versioned SQL script that evolves the database schema safely (tracked in the repo).</td></tr>
+  <tr><td>Monorepo</td><td>A single repository containing multiple packages/apps that share code and tooling.</td></tr>
+  <tr><td>Seed data</td><td>Realistic sample records inserted to make the system demonstrable and testable.</td></tr>
+</table>
+
+<div class="footer-note">
+  Udyking FIS &mdash; Project Defence Preparation Guide &middot; [Your Name] &middot; Computer Science Final Year Project
+</div>
+
+</body>
+</html>

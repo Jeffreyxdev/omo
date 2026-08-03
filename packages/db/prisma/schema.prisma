@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MANAGER
+  SUPERVISOR
+  ATTENDANT
+}
+
+enum Status {
+  OPEN
+  CLOSED
+}
+
+enum FuelType {
+  PMS
+  AGO
+  DPK
+}
+
+model User {
+  id             String           @id @default(cuid())
+  name           String
+  email          String           @unique
+  passwordHash   String
+  role           Role             @default(ATTENDANT)
+  createdAt      DateTime         @default(now())
+  openedShifts   Shift[]          @relation("ShiftOpenedBy")
+  closedShifts   Shift[]          @relation("ShiftClosedBy")
+  inventoryChecks InventoryCheck[]
+}
+
+model Pump {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  fuelType      FuelType
+  pricePerLiter Float
+  active        Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  readings      PumpReading[]
+}
+
+model Tank {
+  id            String          @id @default(cuid())
+  name          String
+  fuelType      FuelType        @unique
+  capacityLitres Float
+  checks        InventoryCheck[]
+}
+
+model Shift {
+  id            String        @id @default(cuid())
+  date          DateTime
+  status        Status        @default(OPEN)
+  openedById    String
+  openedBy      User          @relation("ShiftOpenedBy", fields: [openedById], references: [id])
+  closedById    String?
+  closedBy      User?         @relation("ShiftClosedBy", fields: [closedById], references: [id])
+  openedAt      DateTime      @default(now())
+  closedAt      DateTime?
+  expectedTotal Float         @default(0)
+  actualTotal   Float         @default(0)
+  varianceTotal Float         @default(0)
+  readings      PumpReading[]
+}
+
+model PumpReading {
+  id              String  @id @default(cuid())
+  shiftId         String
+  shift           Shift   @relation(fields: [shiftId], references: [id])
+  pumpId          String
+  pump            Pump    @relation(fields: [pumpId], references: [id])
+  openingReading  Float
+  closingReading  Float
+  litersSold      Float
+  pricePerLiter   Float
+  expectedRevenue Float
+  cashReceived    Float   @default(0)
+  posReceived     Float   @default(0)
+  variance        Float   @default(0)
+  createdAt       DateTime @default(now())
+
+  @@unique([shiftId, pumpId])
+  @@index([pumpId])
+}
+
+model InventoryCheck {
+  id             String   @id @default(cuid())
+  date           DateTime
+  tankId         String
+  tank           Tank     @relation(fields: [tankId], references: [id])
+  openingLevel   Float
+  closingLevel   Float
+  receivedLitres Float    @default(0)
+  salesLitres    Float    @default(0)
+  expectedClosing Float   @default(0)
+  varianceLitres Float    @default(0)
+  recordedById   String
+  recordedBy     User     @relation(fields: [recordedById], references: [id])
+  createdAt      DateTime @default(now())
+
+  @@unique([date, tankId])
+  @@index([tankId])
+}
