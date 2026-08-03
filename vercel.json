@@ -1,6 +1,4 @@
 {
-  "version": 2,
   "framework": "nextjs",
-  "rootDirectory": "apps/web",
   "buildCommand": "npx prisma migrate deploy --schema ../../packages/db/prisma/schema.prisma && next build"
 }
