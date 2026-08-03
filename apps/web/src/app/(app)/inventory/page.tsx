@@ -32,8 +32,8 @@ export default async function InventoryPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Inventory &amp; Storage Control</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="page-title">Inventory &amp; Storage Control</h1>
+        <p className="page-desc mt-1">
           Record physical tank levels and compare them against pump sales to
           detect shrinkage, leaks or unrecorded discharge.
         </p>
@@ -41,21 +41,21 @@ export default async function InventoryPage() {
 
       {canRecord && <InventoryForm tanks={tanks} />}
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="card p-4">
-          <div className="text-xs text-slate-500">Detected product loss (30 days)</div>
-          <div className={`mt-1 text-xl font-bold ${totalLoss > 0 ? "text-rose-600" : "text-emerald-600"}`}>
+      <div className="grid grid-cols-2 gap-px bg-neutral-200">
+        <div className="bg-white p-4">
+          <div className="section-title">Detected product loss (30 days)</div>
+          <div className={`mt-1.5 text-xl font-semibold tracking-tight tnum ${totalLoss > 0 ? "text-rose-600" : "text-emerald-700"}`}>
             {formatLitres(totalLoss)}
           </div>
         </div>
-        <div className="card p-4">
-          <div className="text-xs text-slate-500">Unaccounted surplus (30 days)</div>
-          <div className="mt-1 text-xl font-bold text-slate-900">{formatLitres(totalGain)}</div>
+        <div className="bg-white p-4">
+          <div className="section-title">Unaccounted surplus (30 days)</div>
+          <div className="mt-1.5 text-xl font-semibold tracking-tight tnum text-neutral-900">{formatLitres(totalGain)}</div>
         </div>
       </div>
 
       <div className="card">
-        <h2 className="border-b border-slate-200 px-5 py-4 text-sm font-semibold text-slate-800">
+        <h2 className="section-title border-b border-neutral-200 px-5 py-4">
           Inventory Check History
         </h2>
         <div className="overflow-x-auto p-2">
@@ -75,10 +75,10 @@ export default async function InventoryPage() {
             </thead>
             <tbody>
               {checks.map((c) => (
-                <tr key={c.id} className="hover:bg-slate-50">
+                <tr key={c.id} className="hover:bg-neutral-50">
                   <td className="td">{formatDate(c.date)}</td>
                   <td className="td">
-                    <span className="font-medium text-slate-800">
+                    <span className="font-medium text-neutral-900">
                       {FUEL_SHORT[c.tank.fuelType]} Tank
                     </span>
                   </td>
@@ -105,7 +105,7 @@ export default async function InventoryPage() {
               ))}
               {checks.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="td text-center text-slate-400">
+                  <td colSpan={9} className="td text-center text-neutral-400">
                     No inventory checks recorded yet.
                   </td>
                 </tr>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { FuelType } from "@udyking/shared";
-import { FUEL_SHORT, formatLitres } from "@udyking/shared";
+import { FUEL_COLORS, FUEL_SHORT, formatLitres } from "@udyking/shared";
 import { Icon } from "@/components/icons";
 
 type Tank = {
@@ -60,11 +60,11 @@ export default function TanksManager({ tanks }: { tanks: Tank[] }) {
 
   return (
     <div className="card">
-      <div className="border-b border-slate-200 px-5 py-4">
-        <h2 className="text-sm font-semibold text-slate-800">Underground Storage Tanks</h2>
+      <div className="border-b border-neutral-200 px-5 py-4">
+        <h2 className="section-title">Underground Storage Tanks</h2>
       </div>
 
-      <form onSubmit={createTank} className="grid gap-3 border-b border-slate-100 p-5 sm:grid-cols-4">
+      <form onSubmit={createTank} className="grid gap-3 border-b border-neutral-100 p-5 sm:grid-cols-4">
         <div>
           <label className="label">Tank name</label>
           <input
@@ -120,9 +120,14 @@ export default function TanksManager({ tanks }: { tanks: Tank[] }) {
           <tbody>
             {tanks.map((t) => (
               <tr key={t.id}>
-                <td className="td font-medium text-slate-800">{t.name}</td>
+                <td className="td font-medium text-neutral-900">{t.name}</td>
                 <td className="td">
-                  <span className="badge bg-sky-100 text-sky-700">{FUEL_SHORT[t.fuelType]}</span>
+                  <span
+                    className="badge"
+                    style={{ color: FUEL_COLORS[t.fuelType], borderColor: FUEL_COLORS[t.fuelType] }}
+                  >
+                    {FUEL_SHORT[t.fuelType]}
+                  </span>
                 </td>
                 <td className="td">{formatLitres(t.capacityLitres)}</td>
                 <td className="td">{t._count.checks}</td>
@@ -137,7 +142,7 @@ export default function TanksManager({ tanks }: { tanks: Tank[] }) {
             ))}
             {tanks.length === 0 && (
               <tr>
-                <td colSpan={5} className="td text-center text-slate-400">
+                <td colSpan={5} className="td text-center text-neutral-400">
                   No tanks configured yet.
                 </td>
               </tr>

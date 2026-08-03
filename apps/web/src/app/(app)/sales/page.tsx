@@ -46,8 +46,8 @@ export default async function SalesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Shift Sales</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="page-title">Shift Sales</h1>
+        <p className="page-desc mt-1">
           Record end-of-day pump meter readings and reconcile cash collections.
         </p>
       </div>
@@ -64,7 +64,7 @@ export default async function SalesPage() {
       )}
 
       <div className="card">
-        <h2 className="border-b border-slate-200 px-5 py-4 text-sm font-semibold text-slate-800">
+        <h2 className="section-title border-b border-neutral-200 px-5 py-4">
           Shift History
         </h2>
         <div className="overflow-x-auto p-2">
@@ -82,8 +82,8 @@ export default async function SalesPage() {
               </tr>
             </thead>
             <tbody>
-              {history.map((s) => (
-                <tr key={s.id} className="hover:bg-slate-50">
+{history.map((s) => (
+                <tr key={s.id} className="hover:bg-neutral-50">
                   <td className="td">{s.date.toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
                   <td className="td">{s.openedBy.name}</td>
                   <td className="td">{s.closedBy?.name ?? "-"}</td>
@@ -98,7 +98,7 @@ export default async function SalesPage() {
                   <td className="td">
                     <Link
                       href={`/sales/${s.id}`}
-                      className="text-xs font-medium text-emerald-600 hover:underline"
+                      className="text-xs font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-500"
                     >
                       View
                     </Link>
@@ -107,7 +107,7 @@ export default async function SalesPage() {
               ))}
               {history.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="td text-center text-slate-400">
+                  <td colSpan={8} className="td text-center text-neutral-400">
                     No closed shifts yet.
                   </td>
                 </tr>

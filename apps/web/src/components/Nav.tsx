@@ -36,21 +36,44 @@ export default function Nav({ user }: { user: SessionUser }) {
   }
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-white">
-            <Icon name="fuel" className="h-4.5 w-4.5" />
-          </div>
-          <div className="leading-tight">
-            <div className="text-sm font-bold text-slate-900">Udyking FIS</div>
-            <div className="text-[10px] uppercase tracking-wider text-slate-400">
-              Filling Station System
+    <header className="sticky top-0 z-20 border-b border-neutral-200 bg-white">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex h-14 items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center bg-neutral-900 text-white">
+              <Icon name="fuel" className="h-4 w-4" />
             </div>
+            <div className="leading-tight">
+              <div className="text-sm font-bold tracking-tight text-neutral-900">
+                Udyking FIS
+              </div>
+              <div className="text-[10px] uppercase tracking-[0.14em] text-neutral-400">
+                Filling Station
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden text-right sm:block">
+              <div className="text-sm font-medium text-neutral-800">{user.name}</div>
+              <div className="text-[10px] uppercase tracking-[0.14em] text-neutral-400">
+                {ROLE_LABELS[user.role]}
+              </div>
+            </div>
+            <button
+              onClick={logout}
+              className="flex h-8 w-8 items-center justify-center border border-neutral-300 text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+              title="Sign out"
+            >
+              <Icon name="logout" className="h-4 w-4" />
+            </button>
           </div>
         </div>
 
-        <nav className="flex items-center gap-1 overflow-x-auto">
+        <nav
+          className="flex items-end gap-5 overflow-x-auto"
+          aria-label="Primary"
+        >
           {links.map((l) => {
             const active =
               pathname === l.href || pathname.startsWith(l.href + "/");
@@ -59,32 +82,18 @@ export default function Nav({ user }: { user: SessionUser }) {
                 key={l.href}
                 href={l.href}
                 className={cn(
-                  "flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "flex shrink-0 items-center gap-1.5 border-b-2 px-0.5 pb-2.5 text-sm font-medium transition-colors",
                   active
-                    ? "bg-emerald-50 text-emerald-700"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "border-neutral-900 text-neutral-900"
+                    : "border-transparent text-neutral-500 hover:text-neutral-900"
                 )}
               >
-                <Icon name={l.icon} />
-                {l.label}
+                <Icon name={l.icon} className="h-4 w-4" />
+                <span className="whitespace-nowrap">{l.label}</span>
               </Link>
             );
           })}
         </nav>
-
-        <div className="flex items-center gap-3">
-          <div className="hidden text-right sm:block">
-            <div className="text-sm font-medium text-slate-800">{user.name}</div>
-            <div className="text-xs text-slate-400">{ROLE_LABELS[user.role]}</div>
-          </div>
-          <button
-            onClick={logout}
-            className="flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-slate-500 transition-colors hover:bg-rose-50 hover:text-rose-600"
-            title="Sign out"
-          >
-            <Icon name="logout" />
-          </button>
-        </div>
       </div>
     </header>
   );

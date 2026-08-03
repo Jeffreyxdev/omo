@@ -69,7 +69,7 @@ export default function LoginForm({ next }: { next?: string }) {
         />
       </div>
       {error && (
-        <div className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
+        <div className="alert-box alert-err">
           {error}
         </div>
       )}

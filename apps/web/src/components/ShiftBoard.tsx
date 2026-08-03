@@ -180,12 +180,12 @@ export default function ShiftBoard({
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold tracking-tight text-neutral-900">
                 Shift {shift.date.toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
               </h2>
               <StatusBadge status={shift.status} />
             </div>
-            <p className="mt-0.5 text-sm text-slate-500">
+            <p className="mt-0.5 text-sm text-neutral-500">
               Opened by {shift.openedBy.name} at {formatDateTime(shift.openedAt)}
             </p>
           </div>
@@ -219,14 +219,14 @@ export default function ShiftBoard({
                 const variance = round2(r.revenue - cash - pos);
                 return (
                   <tr key={r.pumpId}>
-                    <td className="td font-medium text-slate-800">{pump.name}</td>
+                    <td className="td font-medium text-neutral-900">{pump.name}</td>
                     <td className="td">
                       <span
                         className="inline-flex items-center gap-1.5 text-xs font-medium"
                         style={{ color: FUEL_COLORS[pump.fuelType] }}
                       >
                         <span
-                          className="h-2 w-2 rounded-full"
+                          className="h-2 w-2"
                           style={{ backgroundColor: FUEL_COLORS[pump.fuelType] }}
                         />
                         {FUEL_LABELS[pump.fuelType]}
@@ -285,7 +285,7 @@ export default function ShiftBoard({
               })}
             </tbody>
             <tfoot>
-              <tr className="bg-slate-50">
+              <tr className="bg-neutral-50">
                 <td className="td font-semibold" colSpan={5}>
                   Totals
                 </td>
@@ -307,8 +307,8 @@ export default function ShiftBoard({
 
         {message && (
           <div
-            className={`mt-4 rounded-lg px-3 py-2 text-sm ${
-              message.type === "ok" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"
+            className={`alert-box mt-4 ${
+              message.type === "ok" ? "alert-ok" : "alert-err"
             }`}
           >
             {message.text}
@@ -330,7 +330,7 @@ export default function ShiftBoard({
             </button>
           )}
           {!allSaved && canClose && (
-            <span className="self-center text-xs text-slate-400">
+            <span className="self-center text-xs text-neutral-400">
               Save all readings before closing the shift
             </span>
           )}
@@ -338,7 +338,7 @@ export default function ShiftBoard({
       </div>
 
       {!canClose && (
-        <div className="flex items-start gap-2 rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-800">
+        <div className="alert-box alert-info flex items-start gap-2">
           <Icon name="alert" className="mt-0.5 h-4 w-4 shrink-0" />
           <span>
             Cash and POS amounts are entered by the supervisor when closing the

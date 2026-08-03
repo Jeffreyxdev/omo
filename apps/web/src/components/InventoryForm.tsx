@@ -67,9 +67,7 @@ export default function InventoryForm({ tanks }: { tanks: Tank[] }) {
 
   return (
     <div className="card p-5">
-      <h2 className="mb-4 text-sm font-semibold text-slate-800">
-        Record Tank Level Check
-      </h2>
+      <h2 className="section-title mb-5">Record Tank Level Check</h2>
       <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
         <div>
           <label className="label">Date</label>
@@ -132,8 +130,8 @@ export default function InventoryForm({ tanks }: { tanks: Tank[] }) {
       </form>
       {message && (
         <div
-          className={`mt-4 rounded-lg px-3 py-2 text-sm ${
-            message.type === "ok" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"
+          className={`alert-box mt-4 ${
+            message.type === "ok" ? "alert-ok" : "alert-err"
           }`}
         >
           {message.text}

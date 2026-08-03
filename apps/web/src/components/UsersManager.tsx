@@ -93,7 +93,7 @@ export default function UsersManager({ users }: { users: UserRow[] }) {
 
   return (
     <div className="card">
-      <form onSubmit={createUser} className="grid gap-3 border-b border-slate-100 p-5 sm:grid-cols-5">
+      <form onSubmit={createUser} className="grid gap-3 border-b border-neutral-100 p-5 sm:grid-cols-5">
         <div>
           <label className="label">Full name</label>
           <input className="input" placeholder="e.g. John Ade" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -139,7 +139,7 @@ export default function UsersManager({ users }: { users: UserRow[] }) {
           <tbody>
             {users.map((u) => (
               <tr key={u.id}>
-                <td className="td font-medium text-slate-800">{u.name}</td>
+                <td className="td font-medium text-neutral-900">{u.name}</td>
                 <td className="td">{u.email}</td>
                 <td className="td">
                   <select

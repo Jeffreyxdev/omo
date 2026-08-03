@@ -100,8 +100,8 @@ export default function ReportsView() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Reports</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="page-title">Reports</h1>
+          <p className="page-desc mt-1">
             Daily, monthly and inventory analysis for financial audits.
           </p>
         </div>
@@ -120,15 +120,15 @@ export default function ReportsView() {
         </div>
       </div>
 
-      <div className="flex gap-2 border-b border-slate-200">
+      <div className="flex gap-6 border-b border-neutral-200">
         {tabs.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
+            className={`-mb-px border-b-2 px-1 py-2.5 text-sm font-medium transition-colors ${
               tab === t.id
-                ? "border-emerald-600 text-emerald-700"
-                : "border-transparent text-slate-500 hover:text-slate-800"
+                ? "border-neutral-900 text-neutral-900"
+                : "border-transparent text-neutral-500 hover:text-neutral-900"
             }`}
           >
             {t.label}
@@ -137,7 +137,7 @@ export default function ReportsView() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 rounded-lg bg-rose-50 px-4 py-3 text-sm text-rose-700">
+        <div className="alert-box alert-err flex items-center gap-2">
           <Icon name="alert" className="h-4 w-4" />
           {error}
         </div>
@@ -154,14 +154,14 @@ export default function ReportsView() {
               { label: "Net Variance", value: formatMoney(sales.totals.variance) },
             ].map((s) => (
               <div key={s.label} className="card p-4">
-                <div className="text-xs text-slate-500">{s.label}</div>
-                <div className="mt-1 truncate text-lg font-bold text-slate-900">{s.value}</div>
+                <div className="section-title">{s.label}</div>
+                <div className="mt-1.5 truncate text-lg font-semibold tracking-tight tnum text-neutral-900">{s.value}</div>
               </div>
             ))}
           </div>
 
           <div className="card p-5">
-            <h2 className="mb-4 text-sm font-semibold text-slate-800">Revenue by Day</h2>
+            <h2 className="section-title mb-5">Revenue by Day</h2>
             <BarChart
               data={sales.series.map((d) => ({
                 label: d.label,
@@ -186,8 +186,8 @@ export default function ReportsView() {
                 </thead>
                 <tbody>
                   {sales.series.map((d) => (
-                    <tr key={d.key} className="hover:bg-slate-50">
-                      <td className="td font-medium text-slate-800">{d.label}</td>
+                    <tr key={d.key} className="hover:bg-neutral-50">
+                      <td className="td font-medium text-neutral-900">{d.label}</td>
                       <td className="td">{formatLitres(d.liters)}</td>
                       <td className="td">{formatMoney(d.revenue)}</td>
                       <td className="td">{formatMoney(d.cash)}</td>
@@ -199,7 +199,7 @@ export default function ReportsView() {
                   ))}
                   {sales.series.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="td text-center text-slate-400">
+                      <td colSpan={6} className="td text-center text-neutral-400">
                         No sales in this period.
                       </td>
                     </tr>
@@ -221,14 +221,14 @@ export default function ReportsView() {
               { label: "Net Variance", value: formatMoney(monthly.totals.variance) },
             ].map((s) => (
               <div key={s.label} className="card p-4">
-                <div className="text-xs text-slate-500">{s.label}</div>
-                <div className="mt-1 text-lg font-bold text-slate-900">{s.value}</div>
+                <div className="section-title">{s.label}</div>
+                <div className="mt-1.5 text-lg font-semibold tracking-tight tnum text-neutral-900">{s.value}</div>
               </div>
             ))}
           </div>
 
           <div className="card p-5">
-            <h2 className="mb-4 text-sm font-semibold text-slate-800">Revenue by Month</h2>
+            <h2 className="section-title mb-5">Revenue by Month</h2>
             <BarChart
               data={monthly.series.map((d) => ({
                 label: d.label,
@@ -253,8 +253,8 @@ export default function ReportsView() {
                 </thead>
                 <tbody>
                   {monthly.series.map((d) => (
-                    <tr key={d.key} className="hover:bg-slate-50">
-                      <td className="td font-medium text-slate-800">{d.label}</td>
+                    <tr key={d.key} className="hover:bg-neutral-50">
+                      <td className="td font-medium text-neutral-900">{d.label}</td>
                       <td className="td">{formatLitres(d.liters)}</td>
                       <td className="td">{formatMoney(d.revenue)}</td>
                       <td className="td">{formatMoney(d.cash)}</td>
@@ -282,8 +282,8 @@ export default function ReportsView() {
               { label: "Net Variance", value: formatLitres(inventory.totals.variance) },
             ].map((s) => (
               <div key={s.label} className="card p-4">
-                <div className="text-xs text-slate-500">{s.label}</div>
-                <div className="mt-1 truncate text-lg font-bold text-slate-900">{s.value}</div>
+                <div className="section-title">{s.label}</div>
+                <div className="mt-1.5 truncate text-lg font-semibold tracking-tight tnum text-neutral-900">{s.value}</div>
               </div>
             ))}
           </div>
@@ -305,8 +305,8 @@ export default function ReportsView() {
                 </thead>
                 <tbody>
                   {inventory.checks.map((c) => (
-                    <tr key={c.id} className="hover:bg-slate-50">
-                      <td className="td font-medium text-slate-800">
+                    <tr key={c.id} className="hover:bg-neutral-50">
+                      <td className="td font-medium text-neutral-900">
                         {new Date(c.date).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}
                       </td>
                       <td className="td">{c.tank.fuelType}</td>
@@ -332,7 +332,7 @@ export default function ReportsView() {
                   ))}
                   {inventory.checks.length === 0 && (
                     <tr>
-                      <td colSpan={8} className="td text-center text-slate-400">
+                      <td colSpan={8} className="td text-center text-neutral-400">
                         No inventory checks in this period.
                       </td>
                     </tr>

@@ -72,65 +72,61 @@ export default async function DashboardPage() {
     {
       label: "Today's Fuel Sold",
       value: formatLitres(todayLiters),
-      icon: "fuel" as const,
-      accent: "bg-amber-50 text-amber-600",
+      tone: "text-neutral-900",
     },
     {
       label: "Today's Expected Revenue",
       value: formatMoney(todayRevenue),
-      icon: "money" as const,
-      accent: "bg-emerald-50 text-emerald-600",
+      tone: "text-neutral-900",
     },
     {
       label: "Open Shift",
       value: openShift ? "Active" : "None",
-      icon: "alert" as const,
-      accent: openShift ? "bg-rose-50 text-rose-600" : "bg-slate-100 text-slate-500",
+      tone: openShift ? "text-rose-600" : "text-neutral-500",
     },
     {
       label: "Active Pumps",
       value: String(pumpCount),
-      icon: "gear" as const,
-      accent: "bg-sky-50 text-sky-600",
+      tone: "text-neutral-900",
     },
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-end justify-between">
+    <div className="space-y-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="page-title">
             Welcome back, {user?.name.split(" ")[0]}
           </h1>
-          <p className="text-sm text-slate-500">
-            Station overview for {new Date().toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+          <p className="page-desc mt-1">
+            Station overview for{" "}
+            {new Date().toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
           </p>
         </div>
-        <Link href="/sales" className="btn btn-primary">
-          <Icon name="fuel" />
+        <Link href="/sales" className="btn btn-primary sm:self-end">
+          <Icon name="fuel" className="h-4 w-4" />
           Shift Sales
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-px bg-neutral-200 lg:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="card p-4">
-            <div className={`mb-3 inline-flex rounded-lg p-2 ${s.accent}`}>
-              <Icon name={s.icon} className="h-5 w-5" />
+          <div key={s.label} className="bg-white p-5">
+            <div className="section-title">{s.label}</div>
+            <div className={`mt-2 text-2xl font-semibold tracking-tight tabular-nums ${s.tone}`}>
+              {s.value}
             </div>
-            <div className="text-lg font-bold text-slate-900">{s.value}</div>
-            <div className="text-xs text-slate-500">{s.label}</div>
           </div>
         ))}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="card p-5 lg:col-span-2">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-slate-800">
-              Fuel Sales - Last 7 Days
-            </h2>
-            <span className="text-xs text-slate-400">Revenue per day</span>
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="section-title">Fuel Sales — Last 7 Days</h2>
+            <span className="text-[11px] uppercase tracking-wider text-neutral-400">
+              Revenue per day
+            </span>
           </div>
           <BarChart
             data={weekSeries.map((d) => ({
@@ -143,32 +139,30 @@ export default async function DashboardPage() {
 
         <div className="space-y-6">
           <div className="card p-5">
-            <h2 className="mb-3 text-sm font-semibold text-slate-800">
-              Open Shift Status
-            </h2>
+            <h2 className="section-title mb-4">Open Shift Status</h2>
             {openShift ? (
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Shift</span>
+              <div className="divide-y divide-neutral-100 text-sm">
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-neutral-500">Shift</span>
                   <StatusBadge status="OPEN" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Opened by</span>
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-neutral-500">Opened by</span>
                   <span className="font-medium">{openShift.openedBy.name}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Pump readings</span>
-                  <span className="font-medium">{openShift._count.readings}</span>
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-neutral-500">Pump readings</span>
+                  <span className="font-medium tnum">{openShift._count.readings}</span>
                 </div>
                 <Link
                   href="/sales"
-                  className="btn btn-outline btn-sm mt-2 w-full"
+                  className="btn btn-outline btn-sm mt-4 w-full"
                 >
                   Continue shift
                 </Link>
               </div>
             ) : (
-              <div className="space-y-2 text-sm text-slate-500">
+              <div className="space-y-3 text-sm text-neutral-500">
                 <p>No shift is open. Start today's shift to log pump readings.</p>
                 <Link href="/sales" className="btn btn-primary btn-sm w-full">
                   Start a shift
@@ -178,23 +172,20 @@ export default async function DashboardPage() {
           </div>
 
           <div className="card p-5">
-            <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-800">
-              <Icon name="alert" className="h-4 w-4 text-rose-500" />
-              Product Loss Alerts
-            </h2>
+            <h2 className="section-title mb-4">Product Loss Alerts</h2>
             {recentLosses.length === 0 ? (
-              <p className="text-sm text-slate-500">No tank losses detected.</p>
+              <p className="text-sm text-neutral-500">No tank losses detected.</p>
             ) : (
-              <ul className="space-y-2">
+              <ul className="divide-y divide-neutral-100">
                 {recentLosses.map((c) => (
                   <li
                     key={c.id}
-                    className="flex items-center justify-between rounded-lg bg-rose-50 px-3 py-2 text-sm"
+                    className="flex items-center justify-between py-2 text-sm"
                   >
-                    <span className="text-slate-600">
+                    <span className="text-neutral-600">
                       {FUEL_SHORT[c.tank.fuelType]} tank
                     </span>
-                    <span className="font-semibold text-rose-600">
+                    <span className="font-semibold tnum text-rose-600">
                       {formatLitres(Math.abs(c.varianceLitres))} loss
                     </span>
                   </li>
@@ -206,9 +197,9 @@ export default async function DashboardPage() {
       </div>
 
       <div className="card">
-        <div className="flex items-center justify-between px-5 pt-4">
-          <h2 className="text-sm font-semibold text-slate-800">Recent Shifts</h2>
-          <Link href="/sales" className="text-xs font-medium text-emerald-600 hover:underline">
+        <div className="flex items-center justify-between px-5 pt-5">
+          <h2 className="section-title">Recent Shifts</h2>
+          <Link href="/sales" className="text-xs font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-500">
             View all
           </Link>
         </div>

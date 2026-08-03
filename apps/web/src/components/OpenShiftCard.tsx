@@ -28,26 +28,22 @@ export default function OpenShiftCard({ pumpCount }: { pumpCount: number }) {
   }
 
   return (
-    <div className="card flex flex-col items-center gap-3 p-8 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+    <div className="card flex flex-col items-center gap-4 p-10 text-center">
+      <div className="flex h-12 w-12 items-center justify-center border border-neutral-300 text-neutral-900">
         <Icon name="check" className="h-6 w-6" />
       </div>
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">
+        <h2 className="text-lg font-semibold tracking-tight text-neutral-900">
           No shift is currently open
         </h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-neutral-500">
           Open today's shift to start recording pump meter readings for{" "}
           {pumpCount} active pump{pumpCount === 1 ? "" : "s"}.
         </p>
       </div>
-      {error && (
-        <div className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
-          {error}
-        </div>
-      )}
+      {error && <div className="alert-box alert-err">{error}</div>}
       <button onClick={openShift} disabled={loading} className="btn btn-primary">
-        <Icon name="fuel" />
+        <Icon name="fuel" className="h-4 w-4" />
         {loading ? "Opening..." : "Open Today's Shift"}
       </button>
     </div>

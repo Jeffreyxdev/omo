@@ -29,8 +29,8 @@ export const FUEL_COLORS: Record<FuelType, string> = {
 };
 
 export const STATUS_COLORS: Record<Status, string> = {
-  OPEN: "bg-amber-100 text-amber-700",
-  CLOSED: "bg-emerald-100 text-emerald-700",
+  OPEN: "border-amber-400 text-amber-700",
+  CLOSED: "border-emerald-400 text-emerald-700",
 };
 
 export function cn(...parts: Array<string | false | null | undefined>): string {

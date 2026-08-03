@@ -84,11 +84,11 @@ export default function PumpsManager({ pumps }: { pumps: Pump[] }) {
 
   return (
     <div className="card">
-      <div className="border-b border-slate-200 px-5 py-4">
-        <h2 className="text-sm font-semibold text-slate-800">Fuel Dispenser Pumps</h2>
+      <div className="border-b border-neutral-200 px-5 py-4">
+        <h2 className="section-title">Fuel Dispenser Pumps</h2>
       </div>
 
-      <form onSubmit={createPump} className="grid gap-3 border-b border-slate-100 p-5 sm:grid-cols-4">
+      <form onSubmit={createPump} className="grid gap-3 border-b border-neutral-100 p-5 sm:grid-cols-4">
         <div>
           <label className="label">Pump name</label>
           <input
@@ -145,10 +145,10 @@ export default function PumpsManager({ pumps }: { pumps: Pump[] }) {
           <tbody>
             {pumps.map((p) => (
               <tr key={p.id} className={p.active ? "" : "opacity-50"}>
-                <td className="td font-medium text-slate-800">{p.name}</td>
+                <td className="td font-medium text-neutral-900">{p.name}</td>
                 <td className="td">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium" style={{ color: FUEL_COLORS[p.fuelType] }}>
-                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: FUEL_COLORS[p.fuelType] }} />
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium" style={{ color: FUEL_COLORS[p.fuelType] }}>
+                    <span className="h-2 w-2" style={{ backgroundColor: FUEL_COLORS[p.fuelType] }} />
                     {FUEL_LABELS[p.fuelType]}
                   </span>
                 </td>
@@ -171,7 +171,7 @@ export default function PumpsManager({ pumps }: { pumps: Pump[] }) {
                     </div>
                   ) : (
                     <button
-                      className="font-medium text-emerald-600 hover:underline"
+                      className="font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-500"
                       onClick={() => {
                         setEditingId(p.id);
                         setEditPrice(String(p.pricePerLiter));
@@ -183,7 +183,7 @@ export default function PumpsManager({ pumps }: { pumps: Pump[] }) {
                 </td>
                 <td className="td">{p._count.readings}</td>
                 <td className="td">
-                  <span className={`badge ${p.active ? "bg-emerald-100 text-emerald-700" : "bg-slate-200 text-slate-600"}`}>
+                  <span className={`badge ${p.active ? "border-emerald-400 text-emerald-700" : "border-neutral-300 text-neutral-500"}`}>
                     {p.active ? "Active" : "Inactive"}
                   </span>
                 </td>
@@ -203,7 +203,7 @@ export default function PumpsManager({ pumps }: { pumps: Pump[] }) {
             ))}
             {pumps.length === 0 && (
               <tr>
-                <td colSpan={6} className="td text-center text-slate-400">
+                <td colSpan={6} className="td text-center text-neutral-400">
                   No pumps configured yet.
                 </td>
               </tr>

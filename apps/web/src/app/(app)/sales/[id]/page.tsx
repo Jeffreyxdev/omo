@@ -33,19 +33,19 @@ export default async function ShiftDetailPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Link href="/sales" className="text-sm text-emerald-600 hover:underline">
+          <Link href="/sales" className="text-sm text-neutral-500 underline underline-offset-4 hover:text-neutral-900">
             &larr; Back to Shift Sales
           </Link>
-          <h1 className="mt-1 text-2xl font-bold text-slate-900">
+          <h1 className="page-title mt-1">
             Shift Detail - {shift.date.toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
           </h1>
         </div>
         <StatusBadge status={shift.status} />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-px bg-neutral-200 sm:grid-cols-3 lg:grid-cols-6">
         {[
           { label: "Opened By", value: shift.openedBy.name },
           { label: "Opened At", value: formatDateTime(shift.openedAt) },
@@ -54,15 +54,15 @@ export default async function ShiftDetailPage({
           { label: "Total Litres", value: formatLitres(litersTotal) },
           { label: "Variance", value: formatMoney(shift.varianceTotal) },
         ].map((s) => (
-          <div key={s.label} className="card p-4">
-            <div className="text-xs text-slate-500">{s.label}</div>
-            <div className="mt-1 truncate text-sm font-semibold text-slate-900">{s.value}</div>
+          <div key={s.label} className="bg-white p-4">
+            <div className="section-title">{s.label}</div>
+            <div className="mt-1.5 truncate text-sm font-semibold tnum text-neutral-900">{s.value}</div>
           </div>
         ))}
       </div>
 
       <div className="card">
-        <h2 className="border-b border-slate-200 px-5 py-4 text-sm font-semibold text-slate-800">
+        <h2 className="section-title border-b border-neutral-200 px-5 py-4">
           Pump Readings &amp; Reconciliation
         </h2>
         <div className="overflow-x-auto p-2">
@@ -83,7 +83,7 @@ export default async function ShiftDetailPage({
             <tbody>
               {shift.readings.map((r) => (
                 <tr key={r.id}>
-                  <td className="td font-medium text-slate-800">{r.pump.name}</td>
+                  <td className="td font-medium text-neutral-900">{r.pump.name}</td>
                   <td className="td">{FUEL_LABELS[r.pump.fuelType]}</td>
                   <td className="td">{r.openingReading.toLocaleString("en-NG", { maximumFractionDigits: 1 })}</td>
                   <td className="td">{r.closingReading.toLocaleString("en-NG", { maximumFractionDigits: 1 })}</td>
@@ -98,14 +98,14 @@ export default async function ShiftDetailPage({
               ))}
               {shift.readings.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="td text-center text-slate-400">
+                  <td colSpan={9} className="td text-center text-neutral-400">
                     No readings recorded.
                   </td>
                 </tr>
               )}
             </tbody>
             <tfoot>
-              <tr className="bg-slate-50">
+              <tr className="bg-neutral-50">
                 <td className="td font-semibold" colSpan={4}>Totals</td>
                 <td className="td font-semibold">{formatLitres(litersTotal)}</td>
                 <td className="td font-semibold">{formatMoney(shift.expectedTotal)}</td>
