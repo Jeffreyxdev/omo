@@ -216,7 +216,13 @@ export default function ShiftBoard({
                 const pump = pumps.find((p) => p.id === r.pumpId)!;
                 const cash = parseFloat(r.cash) || 0;
                 const pos = parseFloat(r.pos) || 0;
+                const reconciled = cash > 0 || pos > 0;
                 const variance = round2(r.revenue - cash - pos);
+                const varianceTone = !reconciled
+                  ? "text-neutral-400"
+                  : Math.abs(variance) > 0.5
+                    ? "text-rose-600"
+                    : "text-emerald-600";
                 return (
                   <tr key={r.pumpId}>
                     <td className="td font-medium text-neutral-900">{pump.name}</td>
@@ -275,7 +281,7 @@ export default function ShiftBoard({
                             onChange={(e) => updateRow(r.pumpId, { ...r, pos: e.target.value })}
                           />
                         </td>
-                        <td className={`td font-semibold ${Math.abs(variance) > 0.5 ? "text-rose-600" : "text-emerald-600"}`}>
+                        <td className={`td font-semibold ${varianceTone}`}>
                           {formatMoney(variance)}
                         </td>
                       </>
@@ -295,7 +301,13 @@ export default function ShiftBoard({
                   <>
                     <td className="td font-semibold">{formatMoney(cashTotal)}</td>
                     <td className="td font-semibold">{formatMoney(posTotal)}</td>
-                    <td className={`td font-semibold ${Math.abs(varianceTotal) > 0.5 ? "text-rose-600" : "text-emerald-600"}`}>
+                    <td className={`td font-semibold ${
+                      cashTotal > 0 || posTotal > 0
+                        ? Math.abs(varianceTotal) > 0.5
+                          ? "text-rose-600"
+                          : "text-emerald-600"
+                        : "text-neutral-400"
+                    }`}>
                       {formatMoney(varianceTotal)}
                     </td>
                   </>
