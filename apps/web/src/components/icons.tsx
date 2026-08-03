@@ -13,9 +13,7 @@ export type IconName =
   | "logout"
   | "plus"
   | "alert"
-  | "money"
-  | "check"
-  | "calendar";
+  | "check";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   dashboard: (
@@ -78,19 +76,7 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <path d="M12 17h.01" />
     </>
   ),
-  money: (
-    <>
-      <rect x="2" y="6" width="20" height="12" rx="2" />
-      <circle cx="12" cy="12" r="2.5" />
-    </>
-  ),
   check: <path d="M20 6 9 17l-5-5" />,
-  calendar: (
-    <>
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <path d="M16 2v4M8 2v4M3 10h18" />
-    </>
-  ),
 };
 
 export function Icon({ name, className = "h-4 w-4" }: IconProps) {

@@ -121,20 +121,39 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="card p-5 lg:col-span-2">
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="section-title">Fuel Sales — Last 7 Days</h2>
-            <span className="text-[11px] uppercase tracking-wider text-neutral-400">
-              Revenue per day
-            </span>
+        <div className="space-y-6 lg:col-span-2">
+          <div className="card p-5">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="section-title">Fuel Sales — Last 7 Days</h2>
+              <span className="text-[11px] uppercase tracking-wider text-neutral-400">
+                Revenue per day
+              </span>
+            </div>
+            <BarChart
+              data={weekSeries.map((d) => ({
+                label: d.label,
+                value: d.revenue,
+                formatted: formatMoney(d.revenue),
+              }))}
+            />
           </div>
-          <BarChart
-            data={weekSeries.map((d) => ({
-              label: d.label,
-              value: d.revenue,
-              formatted: formatMoney(d.revenue),
-            }))}
-          />
+
+          <div className="card p-5">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="section-title">Volume Sold — Last 7 Days</h2>
+              <span className="text-[11px] uppercase tracking-wider text-neutral-400">
+                Litres per day
+              </span>
+            </div>
+            <BarChart
+              data={weekSeries.map((d) => ({
+                label: d.label,
+                value: d.liters,
+                formatted: formatLitres(d.liters),
+              }))}
+              color="#0ea5e9"
+            />
+          </div>
         </div>
 
         <div className="space-y-6">

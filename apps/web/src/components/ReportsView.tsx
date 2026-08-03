@@ -171,6 +171,19 @@ export default function ReportsView() {
             />
           </div>
 
+          <div className="card p-5">
+            <h2 className="section-title mb-5">Litres Sold by Day</h2>
+            <BarChart
+              data={sales.series.map((d) => ({
+                label: d.label,
+                value: d.liters,
+                formatted: formatLitres(d.liters),
+              }))}
+              color="#0ea5e9"
+              axisFormatter={(n) => `${Math.round(n)}L`}
+            />
+          </div>
+
           <div className="card">
             <div className="overflow-x-auto p-2">
               <table className="w-full">
@@ -238,6 +251,19 @@ export default function ReportsView() {
             />
           </div>
 
+          <div className="card p-5">
+            <h2 className="section-title mb-5">Litres Sold by Month</h2>
+            <BarChart
+              data={monthly.series.map((d) => ({
+                label: d.label,
+                value: d.liters,
+                formatted: formatLitres(d.liters),
+              }))}
+              color="#0ea5e9"
+              axisFormatter={(n) => `${Math.round(n)}L`}
+            />
+          </div>
+
           <div className="card">
             <div className="overflow-x-auto p-2">
               <table className="w-full">
@@ -286,6 +312,27 @@ export default function ReportsView() {
                 <div className="mt-1.5 truncate text-lg font-semibold tracking-tight tnum text-neutral-900">{s.value}</div>
               </div>
             ))}
+          </div>
+
+          <div className="card p-5">
+            <h2 className="section-title mb-5">Inventory Variance per Check</h2>
+            <BarChart
+              data={inventory.checks.map((c) => ({
+                label: new Date(c.date).toLocaleDateString("en-NG", { day: "numeric", month: "short" }),
+                value: c.varianceLitres,
+                formatted:
+                  Math.abs(c.varianceLitres) < 0.01
+                    ? "No variance"
+                    : `${c.varianceLitres < 0 ? "Loss of " : "Surplus of "}${formatLitres(Math.abs(c.varianceLitres))}`,
+                color:
+                  Math.abs(c.varianceLitres) < 0.01
+                    ? "#059669"
+                    : c.varianceLitres < 0
+                      ? "#e11d48"
+                      : "#d97706",
+              }))}
+              axisFormatter={(n) => `${Math.round(n)}L`}
+            />
           </div>
 
           <div className="card">

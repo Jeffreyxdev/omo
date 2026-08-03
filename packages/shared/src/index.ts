@@ -53,12 +53,6 @@ export function formatLitres(n: number): string {
   return `${new Intl.NumberFormat("en-NG", { maximumFractionDigits: 1 }).format(n)} L`;
 }
 
-export function formatNumber(n: number, digits = 0): string {
-  return new Intl.NumberFormat("en-NG", {
-    maximumFractionDigits: digits,
-  }).format(n);
-}
-
 export function formatDate(d: Date | string): string {
   const date = typeof d === "string" ? new Date(d) : d;
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
