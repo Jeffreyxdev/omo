@@ -17,8 +17,8 @@ type LinkDef = {
 const LINKS: LinkDef[] = [
   { href: "/dashboard", label: "Dashboard", icon: "dashboard" },
   { href: "/sales", label: "Shift Sales", icon: "fuel" },
-  { href: "/inventory", label: "Inventory", icon: "tank" },
-  { href: "/reports", label: "Reports", icon: "report" },
+  { href: "/inventory", label: "Inventory", icon: "tank", roles: ["MANAGER", "SUPERVISOR"] },
+  { href: "/reports", label: "Reports", icon: "report", roles: ["MANAGER", "SUPERVISOR"] },
   { href: "/pumps", label: "Pumps & Tanks", icon: "gear", roles: ["MANAGER", "SUPERVISOR"] },
   { href: "/users", label: "Staff", icon: "users", roles: ["MANAGER"] },
 ];

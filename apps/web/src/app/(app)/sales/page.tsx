@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@udyking/db";
-import { formatMoney } from "@udyking/shared";
+import { formatMoney, ROLE_LABELS, type Role } from "@udyking/shared";
 import { getSessionUser } from "@/lib/session";
 import OpenShiftCard from "@/components/OpenShiftCard";
 import ShiftBoard from "@/components/ShiftBoard";
@@ -11,7 +11,26 @@ export const metadata: Metadata = { title: "Shift Sales" };
 
 export default async function SalesPage() {
   const user = await getSessionUser();
-  const canClose = user?.role === "MANAGER" || user?.role === "SUPERVISOR";
+  const role = (user?.role ?? "ATTENDANT") as Role;
+  const canClose = role === "MANAGER" || role === "SUPERVISOR";
+  const roleGuidance =
+    role === "ATTENDANT"
+      ? [
+          "Open the shift and enter opening/closing meter readings for each pump.",
+          "Save readings so the system computes litres sold and expected revenue.",
+          "Then wait for the supervisor or manager to reconcile cash and POS totals.",
+        ]
+      : role === "SUPERVISOR"
+      ? [
+          "Review the open shift status and verify pump readings.",
+          "Enter cash and POS collections for each pump.",
+          "Record tank dip levels and monitor volumetric variance.",
+        ]
+      : [
+          "Review dashboard metrics and open shift status.",
+          "Monitor loss alerts and staff/shift logs.",
+          "Use reports for investigations and reconciliations.",
+        ];
 
   const [openShift, pumps, history, lastReadings] = await Promise.all([
     prisma.shift.findFirst({
@@ -50,6 +69,38 @@ export default async function SalesPage() {
         <p className="page-desc mt-1">
           Record end-of-day pump meter readings and reconcile cash collections.
         </p>
+      </div>
+
+      <div className="grid gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-600 shadow-sm sm:grid-cols-[1fr_auto]">
+        <div>
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <span className="font-semibold text-neutral-900">Shift Sales workflow</span>
+            <span className="rounded-full border border-neutral-200 bg-neutral-100 px-2 py-1 text-xs uppercase tracking-[0.18em] text-neutral-500">
+              {ROLE_LABELS[role]}
+            </span>
+          </div>
+          <div className="mt-3 space-y-2">
+            {roleGuidance.map((item, index) => (
+              <div key={item} className="flex items-start gap-3 text-sm">
+                <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-neutral-200 bg-white text-xs font-semibold text-neutral-700">
+                  {index + 1}
+                </span>
+                <p className="text-neutral-600">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+            1. Readings
+          </span>
+          <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+            2. Save
+          </span>
+          <span className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+            3. Reconcile
+          </span>
+        </div>
       </div>
 
       {openShift ? (

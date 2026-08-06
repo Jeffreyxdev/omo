@@ -174,6 +174,12 @@ export default function ShiftBoard({
   const posTotal = round2(rows.reduce((s, r) => s + (parseFloat(r.pos) || 0), 0));
   const varianceTotal = round2(expectedTotal - cashTotal - posTotal);
 
+  const currentStep = !allSaved
+    ? "Step 1: Save all pump readings before reconciliation."
+    : canClose
+    ? "Step 2: Reconcile cash and POS, then close the shift."
+    : "Waiting for supervisor review and shift closure.";
+
   return (
     <div className="space-y-4">
       <div className="card p-5">
@@ -188,6 +194,10 @@ export default function ShiftBoard({
             <p className="mt-0.5 text-sm text-neutral-500">
               Opened by {shift.openedBy.name} at {formatDateTime(shift.openedAt)}
             </p>
+          </div>
+          <div className="rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-600">
+            <div className="font-medium text-neutral-900">Current step</div>
+            <p className="mt-1">{currentStep}</p>
           </div>
         </div>
 
@@ -329,21 +339,21 @@ export default function ShiftBoard({
 
         <div className="mt-4 flex flex-wrap gap-3">
           <button onClick={saveReadings} disabled={saving} className="btn btn-primary">
-            {saving ? "Saving..." : "Save Pump Readings"}
+            {saving ? "Saving..." : "Save meter readings"}
           </button>
           {canClose && (
             <button
               onClick={closeShift}
               disabled={closing || !allSaved}
-              title={allSaved ? "Close shift and lock reconciliation" : "Save all pump readings first"}
+              title={allSaved ? "Close shift and lock reconciliation" : "Save all meter readings first"}
               className="btn btn-danger"
             >
-              {closing ? "Closing..." : "Close Shift & Reconcile"}
+              {closing ? "Closing..." : "Reconcile cash/POS & close shift"}
             </button>
           )}
           {!allSaved && canClose && (
             <span className="self-center text-xs text-neutral-400">
-              Save all readings before closing the shift
+              Save all readings before closing the shift.
             </span>
           )}
         </div>

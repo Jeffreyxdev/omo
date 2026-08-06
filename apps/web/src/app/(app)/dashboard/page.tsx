@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@udyking/db";
-import { formatMoney, formatLitres, FUEL_SHORT } from "@udyking/shared";
+import { formatMoney, formatLitres, FUEL_SHORT, ROLE_LABELS, type Role } from "@udyking/shared";
 import { getSessionUser } from "@/lib/session";
 import { startOfDay, addDays, isoDate, DAY_NAMES } from "@/lib/date";
 import BarChart from "@/components/BarChart";
@@ -91,6 +91,56 @@ export default async function DashboardPage() {
     },
   ];
 
+  const role = (user?.role ?? "ATTENDANT") as Role;
+  const workflowActionsByRole: Record<Role, Array<{ label: string; href: string }>> = {
+    ATTENDANT: [
+      { label: "Log shift meter readings", href: "/sales" },
+      { label: "View open shift status", href: "/dashboard" },
+    ],
+    SUPERVISOR: [
+      { label: "Enter tank dip levels", href: "/inventory" },
+      { label: "Verify cash & POS totals", href: "/sales" },
+      { label: "View open shift status", href: "/dashboard" },
+    ],
+    MANAGER: [
+      { label: "View dashboard metrics", href: "/dashboard" },
+      { label: "Monitor product loss alerts", href: "/reports" },
+      { label: "Query shift & staff logs", href: "/users" },
+      { label: "Execute direct searches", href: "/reports" },
+    ],
+  };
+
+  const roleActions = workflowActionsByRole[role] ?? [];
+  const roleDescription =
+    role === "ATTENDANT"
+      ? "Log pump readings and track open shift status. Your saved readings will be reconciled by the supervisor."
+      : role === "SUPERVISOR"
+      ? "Verify cash/POS totals, enter tank dip levels, and monitor open shift status for loss alerts."
+      : "Monitor KPIs, review loss alerts, and access shift and staff logs for the station.";
+
+  const workflowStepsByRole: Record<Role, string[]> = {
+    ATTENDANT: [
+      "Log in and open the daily shift.",
+      "Enter opening and closing meter readings for each pump.",
+      "Save readings so the system computes litres sold and expected revenue.",
+      "Wait for supervisor reconciliation and tank dip entry.",
+    ],
+    SUPERVISOR: [
+      "Review the open shift status.",
+      "Enter cash and POS totals for each pump.",
+      "Enter underground tank closing dips.",
+      "Monitor volumetric variance and loss alerts.",
+    ],
+    MANAGER: [
+      "Review dashboard metrics and open shift status.",
+      "Monitor product loss alerts and system variance reports.",
+      "Query shift history and staff logs as needed.",
+      "Execute direct searches for audits and investigations.",
+    ],
+  };
+
+  const workflowSteps = workflowStepsByRole[role] ?? [];
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -109,11 +159,44 @@ export default async function DashboardPage() {
         </Link>
       </div>
 
+      <div className="grid gap-3 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm sm:grid-cols-[1fr_auto]">
+        <div>
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            <span className="font-semibold text-neutral-900">{ROLE_LABELS[role]} view</span>
+            <span className="rounded-full border border-neutral-200 bg-neutral-100 px-2 py-1 text-xs uppercase tracking-[0.18em] text-neutral-500">
+              {role}
+            </span>
+          </div>
+          <p className="mt-1 text-sm text-neutral-500">{roleDescription}</p>
+          <div className="mt-4 space-y-2">
+            {workflowSteps.map((step, index) => (
+              <div key={step} className="flex items-start gap-3 text-sm">
+                <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-neutral-200 bg-neutral-50 text-xs font-semibold text-neutral-700">
+                  {index + 1}
+                </span>
+                <p className="text-neutral-600">{step}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {roleActions.map((action) => (
+            <Link
+              key={action.href + action.label}
+              href={action.href}
+              className="btn btn-outline"
+            >
+              {action.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 gap-px bg-neutral-200 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <div key={s.label} className="min-w-0 bg-white p-5">
             <div className="section-title">{s.label}</div>
-            <div className={`mt-2 text-2xl font-semibold tracking-tight tabular-nums break-words ${s.tone}`}>
+            <div className={`mt-2 text-2xl font-semibold tracking-tight tabular-nums wrap-break-word ${s.tone}`}>
               {s.value}
             </div>
           </div>
